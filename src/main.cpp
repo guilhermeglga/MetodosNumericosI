@@ -1,3 +1,5 @@
+#define RAYGUI_IMPLEMENTATION
+
 #include "./interface/app.h"
 
 int main(){

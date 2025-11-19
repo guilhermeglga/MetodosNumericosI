@@ -1,4 +1,5 @@
-# Só linux
+# ToDo:
+# Descobrir como suprimir as warnings da raygui
 
 CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra -MMD -MP
@@ -9,10 +10,15 @@ INCLUDES = \
 LDFLAGS = \
     -L ./deps/lib
 
-# Nem precisa disso eu acho
 ifeq ($(OS), Windows_NT)
+	LDFLAGS = \
+    	-L ./deps/lib/windows
+
 	LDLIBS = -lraylib -lgdi32 -lwinmm
 else
+	LDFLAGS = \
+    	-L ./deps/lib
+
 	LDLIBS = -lraylib # não sei se tá certo
 endif
 

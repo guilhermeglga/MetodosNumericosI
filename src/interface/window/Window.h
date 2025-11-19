@@ -1,6 +1,7 @@
 #ifndef UI_WINDOW_H
 #define UI_WINDOW_H
 
+// Se essa classe não crescer mais que isso dá pra passar as informações dela pra classe App, só pra diminuir o tanto de classes
 class Window{
     public:
         Window(int width_, int height_);

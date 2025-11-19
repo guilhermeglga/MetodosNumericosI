@@ -3,9 +3,10 @@
 
 #include <raylib.h>
 
-#include "./window/Window.h"
-#include "./mainFrame/MainFrame.h"
+#include "./Window/Window.h"
+#include "./MainFrame/MainFrame.h"
 
+// Classe Principal da UI(A main da UI basicamente)
 class App{
     public:
         void start();
