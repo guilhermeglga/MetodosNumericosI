@@ -1,4 +1,4 @@
-#include "app.h"
+#include "App.h"
 
 void App::start(){
     InitWindow(window.get_width(), window.get_height(), "MN");

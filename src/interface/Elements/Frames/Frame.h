@@ -1,9 +1,11 @@
 #ifndef UI_FRAME_H
 #define UI_FRAME_H
 
+// Idealmente esse é o único arquivo que inclui a raylib e a raygui
+
+#include <raylib.h>
 #include <raygui.h>
 
-// Não acho que precise dessa classe
 class Frame{
     public:
         virtual void render() = 0;

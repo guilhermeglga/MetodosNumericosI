@@ -6,7 +6,7 @@
 // Classe só pra testar o scroll
 class Gradient : public ScrollableFrame{
     public:
-        void render(Rectangle scrollOffset) override;
+        void render(Vector2 scrollOffset) override;
 
         Gradient(Rectangle bounds_, Color color1_, Color color2_);
     private:

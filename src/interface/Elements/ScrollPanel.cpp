@@ -1,9 +1,8 @@
 #include "ScrollPanel.h"
 
-ScrollPanel::ScrollPanel(Rectangle bounds_, std::string title_, ScrollableFrame* child_)
+ScrollPanel::ScrollPanel(Rectangle bounds_, ScrollableFrame* child_)
     : Frame(bounds_)
 {
-    title = title_;
     child = child_;
 
     scroll = { 99, -20 };
@@ -18,10 +17,10 @@ ScrollPanel::~ScrollPanel(){
 }
 
 void ScrollPanel::render(){
-    GuiScrollPanel(panelRec, title.c_str(), panelContentRec, &scroll, &view);
+    GuiScrollPanel(panelRec, 0, panelContentRec, &scroll, &view);
 
     BeginScissorMode(view.x, view.y, view.width, view.height);
-        child->render({panelRec.x + scroll.x, panelRec.y + scroll.y, panelContentRec.width, panelContentRec.height}); // Não tenho certeza se isso tá certo assim
+        child->render(Vector2{panelRec.x + scroll.x, panelRec.y + scroll.y});
     EndScissorMode();
 
     //DrawStyleEditControls();

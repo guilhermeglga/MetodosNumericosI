@@ -1,15 +1,11 @@
 #include "Gradient.h"
 
-void Gradient::render(Rectangle scrollOffset){
+void Gradient::render(Vector2 scrollOffset){
+    ScrollableFrame::render(scrollOffset);
+
     DrawRectangleGradientEx(
-        {
-            bounds.x + scrollOffset.x, 
-            bounds.y + scrollOffset.y, 
-            bounds.width + scrollOffset.width, 
-            bounds.height + scrollOffset.height
-        }, 
-        
-        color1, color1, color2, color2
+        get_offset_bounds(),
+        color2, color1, color2, color1
     );
 }
 

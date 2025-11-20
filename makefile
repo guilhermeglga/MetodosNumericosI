@@ -1,8 +1,7 @@
-# ToDo:
-# Descobrir como suprimir as warnings da raygui
+# Não consegui testar se tá tudo certo no linux
 
 CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -MMD -MP
+CXXFLAGS := -std=c++17 -Wall -Wextra -MMD -MP -isystem deps/include
 
 INCLUDES = \
     -I ./deps/include
@@ -19,23 +18,27 @@ else
 	LDFLAGS = \
     	-L ./deps/lib
 
-	LDLIBS = -lraylib # não sei se tá certo
+	LDLIBS = -lraylib
 endif
 
-SRC := $(shell find src -name "*.cpp")
-OBJ := $(SRC:.cpp=.o)
+SRC_DIR := src
+BUILD_DIR := build
+
+SRC := $(shell find $(SRC_DIR) -name "*.cpp")
+OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 DEP := $(OBJ:.o=.d)
 
-TARGET := build/main
+TARGET := $(BUILD_DIR)/main
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	mkdir -p build
+	mkdir -p $(BUILD_DIR)
 	$(CXX) $(INCLUDES) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
-	rm -f $(OBJ) $(DEP)
+	# rm -f $(OBJ) $(DEP)
 
-%.o: %.cpp
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
+	mkdir -p $(dir $@)
 	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS) $(LDLIBS)
 
 -include $(DEP)
