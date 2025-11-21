@@ -2,6 +2,7 @@
 
 void App::start(){
     InitWindow(window.get_width(), window.get_height(), "MN");
+    SetTargetFPS(60);
     
     while(!WindowShouldClose()){
         BeginDrawing();

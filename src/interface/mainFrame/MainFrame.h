@@ -1,7 +1,7 @@
 #ifndef UI_MAINFRAME_H
 #define UI_MAINFRAME_H
 
-#include "../Elements/ScrollPanel.h"
+#include "../Widgets/ScrollPanel/ScrollPanel.h"
 
 class MainFrame{
     public:

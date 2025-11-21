@@ -17,6 +17,7 @@ class App{
 };
 
 /* ToDo da UI:
+    - Ficar de olho no uso de CPU do programa
     - Criar entradas:
         - Pra opção do Newton com ou sem FL
         - Pra derivada numérica ou feita na mão

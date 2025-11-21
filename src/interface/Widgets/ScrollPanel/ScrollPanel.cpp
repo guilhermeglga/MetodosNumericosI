@@ -1,29 +1,52 @@
 #include "ScrollPanel.h"
 
-ScrollPanel::ScrollPanel(Rectangle bounds_, ScrollableFrame* child_)
+ScrollPanel::ScrollPanel(Rectangle bounds_)
     : Frame(bounds_)
 {
-    child = child_;
-
     scroll = { 99, -20 };
     view = { 0, 0, 0, 0 };
 
     panelRec = { 0, 0, 1080, 720 };
-    panelContentRec = child->get_bounds(); // Tamanho do conteúdo
+    panelContentRec = { 0, 0, 0, 0 }; // Tamanho do conteúdo
 }
 
-ScrollPanel::~ScrollPanel(){
-    delete child;
+void ScrollPanel::append_child(ScrollableFrame *child_){
+    children.push_back(child_);
+    panelContentRec = get_max_children_bounds(); // Não é super eficiente mas não deve ser um problema
+}
+
+ScrollPanel::~ScrollPanel()
+{
+    for (ScrollableFrame* child : children){
+        delete child;
+    }
 }
 
 void ScrollPanel::render(){
     GuiScrollPanel(panelRec, 0, panelContentRec, &scroll, &view);
 
     BeginScissorMode(view.x, view.y, view.width, view.height);
-        child->render(Vector2{panelRec.x + scroll.x, panelRec.y + scroll.y});
+        for (ScrollableFrame* child : children){
+            child->render(Vector2{panelRec.x + scroll.x, panelRec.y + scroll.y});
+        }
     EndScissorMode();
 
     //DrawStyleEditControls();
+}
+
+Rectangle ScrollPanel::get_max_children_bounds(){
+    float maxWidth = 0, maxHeight = 0;
+    for(ScrollableFrame* child : children){
+        Rectangle childBounds = child->get_bounds();
+
+        float childWidth = childBounds.width + childBounds.x;
+        if(childWidth > maxWidth) maxWidth = childWidth;
+        
+        float childHeight = childBounds.height + childBounds.y;
+        if(childHeight > maxHeight) maxHeight = childHeight;
+    }
+
+    return Rectangle{0, 0, maxWidth, maxHeight};
 }
 
 /* Draw and process scroll bar style edition controls
