@@ -3,11 +3,11 @@
 ScrollPanel::ScrollPanel(Rectangle bounds_)
     : Frame(bounds_)
 {
-    scroll = { 99, -20 };
+    scroll = { 0, 0 };
     view = { 0, 0, 0, 0 };
 
     panelRec = { 0, 0, 1080, 720 };
-    panelContentRec = { 0, 0, 0, 0 }; // Tamanho do conteúdo
+    panelContentRec = { 0, 0, 0, 0 };
 }
 
 void ScrollPanel::append_child(ScrollableFrame *child_){

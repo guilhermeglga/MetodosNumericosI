@@ -35,7 +35,6 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	mkdir -p $(BUILD_DIR)
 	$(CXX) $(INCLUDES) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
-	# rm -f $(OBJ) $(DEP)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
 	mkdir -p $(dir $@)

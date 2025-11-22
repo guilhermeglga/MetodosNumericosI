@@ -4,17 +4,18 @@
 #include "../Frames/ScrollableFrame.h"
 
 #include <functional>
+#include <string>
 
 using namespace std;
 
 class Button : public ScrollableFrame{
     public:
-        void render(Vector2 scrollOffset);
+        void render(Vector2 scrollOffset) override;
 
-        Button(Rectangle bounds_, char* title_, function<void()> callback_);
+        Button(Rectangle bounds_, string label_, function<void()> callback_);
 
     private:
-        char* title;
+        string label;
         function<void()> callback;
 };
 

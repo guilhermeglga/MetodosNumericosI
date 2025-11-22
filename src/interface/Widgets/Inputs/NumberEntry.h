@@ -7,9 +7,12 @@
 
 /* ToDo:
     - Essa fonte não tá muito legal
+    - O backspace tá apagando muito rápido
 */
 
 #define UI_MAX_NUMBER_DIGITS 100
+
+// Entrada de decimal, com uma validação básica de input
 class NumberEntry : public ScrollableFrame{
     public:
         void render(Vector2 scrollOffset) override;

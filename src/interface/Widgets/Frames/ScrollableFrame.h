@@ -3,6 +3,7 @@
 
 #include "Frame.h"
 
+// Widget base pra qualquer widget que precise entrar num scrollpanel
 class ScrollableFrame : public Frame{
     public:
         virtual void render(Vector2 scrollOffset);

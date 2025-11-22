@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <raygui.h>
 
+// Widget base
 class Frame{
     public:
         virtual void render() = 0;

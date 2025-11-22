@@ -11,7 +11,7 @@ void NumberEntry::render(Vector2 scrollOffset){
     if(GuiTextBox(offsetBounds, text, 99, editMode)){
         editMode = !editMode;
 
-        if(validate_input()){
+        if(strcmp(text, "") && validate_input()){
             strcpy(lastValidated, text);
             cur_num = atof(lastValidated);
         }else{
@@ -36,9 +36,10 @@ bool NumberEntry::validate_input()
 {
     int dot_num = 0;
     for(char c : text){
-        if(c == 46) dot_num++;
+        if(c == 46 || c == 44) dot_num++;
 
-        if(dot_num > 1 || (c != 0 && c!=46 && (c < 48 || c > 57))) return false;
+        // Tem que desenhar a tabela verdade pra entender essa aqui
+        if(dot_num > 1 || (c != 0 && c!=46 && c!=44 && (c < 48 || c > 57))) return false;
     }
 
     return true;

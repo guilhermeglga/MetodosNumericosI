@@ -5,14 +5,14 @@ void Button::render(Vector2 scrollOffset){
 
     Rectangle offsetBounds = get_offset_bounds();
     
-    if(GuiButton(offsetBounds, title)){
+    if(GuiButton(offsetBounds, label.c_str())){
         callback();
     }
 }
 
-Button::Button(Rectangle bounds_, char* title_, function<void()> callback_)
+Button::Button(Rectangle bounds_, string label_, function<void()> callback_)
     :ScrollableFrame(bounds_) 
 {
-    title = title_;
+    label = label_;
     callback = callback_;
 }

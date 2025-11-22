@@ -11,7 +11,15 @@
 
 using namespace std;
 
-// Não deletar as childs por fora, a própria classe cuida disso
+/*
+    Não deve funcionar se ele for inicializado com origem diferente de 0,0
+    mas se for necessário não é dificil consertar
+
+    Deveria fazer ele ser um ScrollableFrame
+*/
+
+// Painel com barra de scroll, tem uma lista de filhos que renderiza e scrolla automaticamente
+// Não deletar os filhos por fora, a própria classe cuida disso
 class ScrollPanel : public Frame{
         public:
         void render() override;
@@ -22,11 +30,12 @@ class ScrollPanel : public Frame{
         ~ScrollPanel() override;
 
     private:
-        Vector2 scroll;
-        Rectangle view;
+        // Esses dois são controlados pelo ScrollPanel da própria raygui
+        Vector2 scroll; // Posição da scrollbar
+        Rectangle view; // Posição da visualização do conteúdo
 
-        Rectangle panelRec;
-        Rectangle panelContentRec;
+        Rectangle panelRec; // bounds da visualização do conteudo
+        Rectangle panelContentRec; // bounds do conteúdo total
 
         vector<ScrollableFrame*> children;
 
