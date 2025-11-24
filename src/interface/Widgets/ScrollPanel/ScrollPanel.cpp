@@ -15,6 +15,10 @@ void ScrollPanel::append_child(ScrollableFrame *child_){
     panelContentRec = get_max_children_bounds(); // Não é super eficiente mas não deve ser um problema
 }
 
+void ScrollPanel::update_content_rec(){
+    panelContentRec = get_max_children_bounds();
+}
+
 ScrollPanel::~ScrollPanel()
 {
     for (ScrollableFrame* child : children){

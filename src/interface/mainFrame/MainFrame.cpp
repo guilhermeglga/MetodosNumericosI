@@ -11,12 +11,53 @@
 #include <string>
 
 MainFrame::MainFrame()
-    : scrollPanel({0, 0, 1080, 720})
+    : scrollPanel({0, 0, 1080, 720}),
+    fixedButton({0, 0, 0, 0}, "", []{}) // Gambiarra, mas é só pra testar tbm
 {
-    scrollPanel.append_child(new Gradient({0, 0, 2000, 2000}, BLACK, WHITE));
-    scrollPanel.append_child(new IterList({100, 100, 400, 400}));
+    // Quadro temporario, só pra testar
+    iteracao iter1;
+    iteracao iter2;
+    iteracao iter3;
 
-    for(float i = 1; i <= 20; i++){
+    iter1.raiz = 2.0f;
+    iter2.raiz = 2.352f;
+    iter3.raiz = 2.4024f;
+
+    iter1.funcaoNaRaiz = iter1.raiz*2;
+    iter2.funcaoNaRaiz = iter2.raiz*2;
+    iter3.funcaoNaRaiz = iter3.raiz*2;
+
+    iter1.erroEmX = 23.055f;
+    iter2.erroEmX = 3.521f;
+    iter3.erroEmX = 0.155f;
+
+    iter1.erroEmFX = 1.525f;
+    iter2.erroEmFX = 0.752f;
+    iter3.erroEmFX = 0.091f;
+
+    iter1.parada = false;
+    iter2.parada = false;
+    iter3.parada = true;
+
+    QuadroResposta* board_ = new QuadroResposta();
+    board_->adicionar(iter1);
+    board_->adicionar(iter2);
+
+    IterList* iterList = new IterList({50, 100, 0, 0}, board_);
+    
+    scrollPanel.append_child(new Gradient({0, 0, 2000, 2000}, BLACK, WHITE));
+    scrollPanel.append_child(iterList);
+
+    ScrollPanel* scrollWrapper = &scrollPanel;
+    fixedButton = Button({0, 0, 200, 50}, "Adicionar",
+        [board_, iter3, iterList, scrollWrapper]{
+            board_->adicionar(iter3);
+            iterList->updateBoard();
+            scrollWrapper->update_content_rec();
+        }
+    );
+
+    /*for(float i = 1; i <= 20; i++){ // Teste de inputs
         scrollPanel.append_child(new NumberEntry({50, 50*i}));
 
         scrollPanel.append_child(new Button({300, 50*i, 75, 20}, "Botao", 
@@ -33,9 +74,10 @@ MainFrame::MainFrame()
         string checkLabel = "Check";
         checkLabel.append(std::to_string((int)i));
         scrollPanel.append_child(new CheckBox({500, 50*i, 32, 32}, checkLabel));
-    }
+    }*/ 
 }
 
 void MainFrame::render(){
     scrollPanel.render();
+    fixedButton.render({0, 0});
 }

@@ -29,6 +29,7 @@ class App{
         - Criar apresentação do quadro respostas
         - Criar apresentação do quadro comparativo
 
+    - Falta programar um suporte decente pra Frames fixos, se precisar
     - Resolver como tudo isso vai ser apresentado
 */
 

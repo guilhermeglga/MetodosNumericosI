@@ -3,6 +3,9 @@
 
 #include "../Widgets/ScrollPanel/ScrollPanel.h"
 
+// Temp && Test
+#include "../Widgets/Inputs/Button.h"
+
 class MainFrame{
     public:
         void render();
@@ -11,6 +14,7 @@ class MainFrame{
 
     private:
         ScrollPanel scrollPanel;
+        Button fixedButton;
 };
 
 

@@ -27,6 +27,9 @@ class ScrollPanel : public Frame{
         ScrollPanel(Rectangle bounds_);
         void append_child(ScrollableFrame* child_);
 
+        // dar trigger num update manual do tamanho do conteudo
+        void update_content_rec();
+
         ~ScrollPanel() override;
 
     private:
