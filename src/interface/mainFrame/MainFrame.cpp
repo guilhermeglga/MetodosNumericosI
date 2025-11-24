@@ -5,6 +5,7 @@
 #include "../Widgets/Inputs/Button.h"
 #include "../Widgets/Label.h"
 #include "../Widgets/Inputs/CheckBox.h"
+#include "../Widgets/Tables/IterList.h"
 
 #include <iostream>
 #include <string>
@@ -13,6 +14,7 @@ MainFrame::MainFrame()
     : scrollPanel({0, 0, 1080, 720})
 {
     scrollPanel.append_child(new Gradient({0, 0, 2000, 2000}, BLACK, WHITE));
+    scrollPanel.append_child(new IterList({100, 100, 400, 400}));
 
     for(float i = 1; i <= 20; i++){
         scrollPanel.append_child(new NumberEntry({50, 50*i}));
