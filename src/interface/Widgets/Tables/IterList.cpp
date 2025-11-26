@@ -1,18 +1,22 @@
 #include "IterList.h"
 
-#include <iostream>
-
 void IterList::render(Vector2 scrollOffset){
-    ScrollableFrame::render(scrollOffset);
+    AnimatedFrame::render(scrollOffset);
 
     Rectangle offsetBounds = get_offset_bounds();
+    int animFrames = getAnimFrames();
 
     drawHeaders(offsetBounds);
 
-    for(int i = 0; i < board->tamanhoQuadro(); i++){
+    int tamanhoQuadro = board->tamanhoQuadro();
+    for(int i = 0; i < tamanhoQuadro; i++){
         iteracao iter = board->retornarInteracao(i);
         float x = (i+1)*UI_TABLE_CELL_WIDTH;
         float y = UI_TABLE_CELL_HEIGHT;
+
+        if(i == tamanhoQuadro-1 && animFrames > 0){
+            y = y - animFrames*2;
+        }
 
         drawCell({offsetBounds.x + x, offsetBounds.y + y*1}, to_string(iter.raiz));
         drawCell({offsetBounds.x + x, offsetBounds.y + y*2}, to_string(iter.funcaoNaRaiz));
@@ -23,7 +27,7 @@ void IterList::render(Vector2 scrollOffset){
 }
 
 IterList::IterList(Rectangle bounds_, QuadroResposta *board_)
-    :ScrollableFrame(bounds_)
+    :AnimatedFrame(bounds_)
 {
     board = board_;
 
@@ -32,8 +36,12 @@ IterList::IterList(Rectangle bounds_, QuadroResposta *board_)
 }
 
 void IterList::updateBoard(){
-    bounds.height = 6*UI_TABLE_CELL_HEIGHT; // 5 propriedades + 1 celula vazia
-    bounds.width = (board->tamanhoQuadro() + 1)*UI_TABLE_CELL_WIDTH; // tamanho do quadro + 1 celula vazia
+    //float newHeight = 6*UI_TABLE_CELL_HEIGHT; // Não dá pra adicionar propriedades
+    float newWidth = (board->tamanhoQuadro() + 1)*UI_TABLE_CELL_WIDTH; // tamanho do quadro + 1 celula vazia
+    if(newWidth <= bounds.width) return;
+
+    bounds.width = newWidth;
+    startAnim(15);
 }
 
 void IterList::drawCell(Vector2 pos, string text){

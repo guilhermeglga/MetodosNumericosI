@@ -7,7 +7,6 @@
 #include "../Widgets/Inputs/CheckBox.h"
 #include "../Widgets/Tables/IterList.h"
 
-#include <iostream>
 #include <string>
 
 MainFrame::MainFrame()

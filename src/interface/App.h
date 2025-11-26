@@ -17,7 +17,6 @@ class App{
 };
 
 /* ToDo da UI:
-    - Ficar de olho no uso de CPU do programa
     - Criar entradas:
         - Pra opção do Newton com ou sem FL
         - Pra derivada numérica ou feita na mão
@@ -29,6 +28,7 @@ class App{
         - Criar apresentação do quadro respostas
         - Criar apresentação do quadro comparativo
 
+    - Padronizar a capitalização do nome das pastas
     - Falta programar um suporte decente pra Frames fixos, se precisar
     - Resolver como tudo isso vai ser apresentado
 */
