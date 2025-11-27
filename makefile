@@ -1,46 +1,29 @@
-# Não consegui testar se tá tudo certo no linux
+# 1. Configurações
+CXX = g++
+# -Isrc ajuda a encontrar os headers (.h) que estão espalhados nas subpastas
+CXXFLAGS = -Wall -g -Isrc -Iinclude
+TARGET = meu_programa_cpp
 
-CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -MMD -MP -isystem deps/include
+# 2. Arquivos Fonte (A Mágica acontece aqui)
+# Usa o comando 'find' para listar TODOS os .cpp dentro de src e subpastas
+SRCS = $(shell find src -name "*.cpp")
 
-INCLUDES = \
-    -I ./deps/include
+# Gera a lista de objetos (.o) mantendo a estrutura de pastas
+OBJS = $(SRCS:.cpp=.o)
 
-LDFLAGS = \
-    -L ./deps/lib
-
-ifeq ($(OS), Windows_NT)
-	LDFLAGS = \
-    	-L ./deps/lib/windows
-
-	LDLIBS = -lraylib -lgdi32 -lwinmm
-else
-	LDFLAGS = \
-    	-L ./deps/lib
-
-	LDLIBS = -lraylib
-endif
-
-SRC_DIR := src
-BUILD_DIR := build
-
-SRC := $(shell find $(SRC_DIR) -name "*.cpp")
-OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
-DEP := $(OBJ:.o=.d)
-
-TARGET := $(BUILD_DIR)/main
-
+# 3. Regra Principal
 all: $(TARGET)
 
-$(TARGET): $(OBJ)
-	mkdir -p $(BUILD_DIR)
-	$(CXX) $(INCLUDES) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
+# 4. Linkagem
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
-	mkdir -p $(dir $@)
-	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS) $(LDLIBS)
+# 5. Compilação Genérica
+# O mkdir -p garante que a pasta do .o exista antes de compilar
+%.o: %.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
--include $(DEP)
-
+# 6. Limpeza
 clean:
-	rm -f $(OBJ) $(DEP) $(TARGET)
+	rm -f $(OBJS) $(TARGET)
