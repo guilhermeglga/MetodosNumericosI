@@ -1,0 +1,20 @@
+#include <vector>
+#include <cmath>
+
+class Polinomio {
+    public:
+        Polinomio(std::vector<double> a);
+
+        double valor_funcao(double x);
+        double derivada_manual(double x);
+        double derivada_horner(double x);
+        
+        double isolamento();
+
+    private:
+        //vetor com coeficientes
+        std::vector<double> a;
+        std::vector<double> b;
+        std::vector<double> c;
+        int n;
+};
