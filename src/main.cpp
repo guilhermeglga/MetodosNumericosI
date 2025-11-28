@@ -9,7 +9,7 @@
 //
 //    return 0;
 //}
-#include "./métodos/Newton/NewtonPadrao/NewtonPadraoHorner.h"
+#include "./metodos/Newton/NewtonPadrao/NewtonPadraoHorner.h"
 #include <iostream>
 #include <vector>
 using namespace std;
