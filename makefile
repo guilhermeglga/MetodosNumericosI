@@ -1,29 +1,22 @@
-# 1. Configurações
 CXX = g++
-# -Isrc ajuda a encontrar os headers (.h) que estão espalhados nas subpastas
-CXXFLAGS = -Wall -g -Isrc -Iinclude
-TARGET = meu_programa_cpp
+CXXFLAGS = -Wall -g -Isrc -Iinclude -I../deps/include
+LIB_DIR = -L../deps/lib
+LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+TARGET = CalculadoraDeRaízesDePolinômios
+BUILD_DIR = build
 
-# 2. Arquivos Fonte (A Mágica acontece aqui)
-# Usa o comando 'find' para listar TODOS os .cpp dentro de src e subpastas
 SRCS = $(shell find src -name "*.cpp")
+OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
-# Gera a lista de objetos (.o) mantendo a estrutura de pastas
-OBJS = $(SRCS:.cpp=.o)
+all: $(BUILD_DIR)/$(TARGET)
 
-# 3. Regra Principal
-all: $(TARGET)
+$(BUILD_DIR)/$(TARGET): $(OBJS)
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LIB_DIR) $(LIBS)
 
-# 4. Linkagem
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
-
-# 5. Compilação Genérica
-# O mkdir -p garante que a pasta do .o exista antes de compilar
-%.o: %.cpp
+$(BUILD_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# 6. Limpeza
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf $(BUILD_DIR)

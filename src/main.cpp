@@ -9,21 +9,25 @@
 //
 //    return 0;
 //}
-#include "./metodos/Newton/NewtonPadrao/NewtonPadraoHorner.h"
+
+//#include "./metodos/Newton/NewtonPadrao/NewtonPadraoHorner.h"
+#include "./metodos/Newton/NewtonFL/NewtonFLHorner.h"
 #include <iostream>
 #include <vector>
-using namespace std;
 
 int main() {
     int n;
-    double lambda, a3, a2, epsilon;
-    cin >> n >> lambda >> a3 >> a2 >> epsilon;
-    vector<double> vec_pol = {3, a2 * -9, 0, a3};
+    double a3, a2, epsilon;
+    std::cin >> n;
+    std::vector<double> lambda(n);
+    for (int i = 0; i < n; i++) std::cin >> lambda[i];
+    std::cin >> a3 >> a2 >> epsilon;
+    std::vector<double> vec_pol = {3, a2 * -9, 0, a3};
     Polinomio pol(vec_pol);
     double x0 = pol.isolamento();
-    NewtonPadraoHorner newt(pol, x0, epsilon);
+    NewtonFLHorner newt(pol, x0, epsilon, n, lambda);
     for (int i = 0; i < 5; i++) {
-        cout << "O xk atual eh " << newt.get_xk_atual() << endl;
+        std::cout << "O xk atual eh " << newt.get_xk_atual() << std::endl;
         newt.iterar();
     }
     return 0;
