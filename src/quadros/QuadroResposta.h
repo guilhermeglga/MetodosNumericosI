@@ -1,3 +1,5 @@
+#ifndef QUADRORESPOSTA_H
+#define QUADRORESPOSTA_H
 
 #include <vector>
 #include <chrono>
@@ -34,3 +36,5 @@ class QuadroResposta{
         Newton metodo;
         long long tempo;
 };
+
+#endif // QUADRORESPOSTA_H

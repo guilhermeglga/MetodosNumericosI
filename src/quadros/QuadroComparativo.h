@@ -21,4 +21,5 @@ class QuadroComparativo {
         int n;
         std::vector<double> lambda;
 };
-#endif
+
+#endif // QUADROCOMPARATIVO_H

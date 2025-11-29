@@ -1,3 +1,6 @@
+#ifndef NEWTONFL_H
+#define NEWTONFL_H
+
 #include "../Newton.h"
 
 class NewtonFL : public Newton {
@@ -29,3 +32,5 @@ class NewtonFL : public Newton {
 //        std::vector<double> iteracoes, lambda;
 //        int iteracao_atual, n;
 //};
+
+#endif // NEWTONFL_H

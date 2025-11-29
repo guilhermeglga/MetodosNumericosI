@@ -1,3 +1,6 @@
+#ifndef NEWTON_H
+#define NEWTON_H
+
 #include <vector>
 #include <cmath>
 #include "Polinomio.h"
@@ -19,3 +22,5 @@ class Newton {
         std::vector<float> iteracoes;
         int iteracao_atual;
 };
+
+#endif // NEWTON_H
