@@ -1,5 +1,4 @@
 #include "QuadroComparativo.h"
-#include <Polinomio.h>
 
 QuadroComparativo::QuadroComparativo(NomeMetodo metodo1, NomeMetodo metodo2, std::vector<double> coeficientes, double epsilon, int n, std::vector<double> lambda): 
     quadro1(metodo1, coeficientes, epsilon, lambda, n),
@@ -20,11 +19,15 @@ std::pair<iteracao*,iteracao*> QuadroComparativo::getIteracoes(int i){
     int tamanho1 = tamanhosQuadros().first;
     int tamanho2 = tamanhosQuadros().second;
     if (i > tamanho1){
-        iteracoes.first = &quadro1.getIteracao(i);
+        iteracao iter = quadro1.getIteracao(i);
+        iteracao* iterptr = new iteracao(iter);
+        iteracoes.first = iterptr;
     }else{
         iteracoes.first = nullptr;
     }if (i > tamanho2){
-        iteracoes.second = &quadro2.getIteracao(i);
+        iteracao iter = quadro2.getIteracao(i);
+        iteracao* iterptr = new iteracao(iter);
+        iteracoes.second = iterptr;
     }else{
         iteracoes.second = nullptr;
     }

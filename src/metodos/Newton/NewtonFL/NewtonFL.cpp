@@ -1,7 +1,9 @@
 #include "NewtonFL.h"
 
-NewtonFL::NewtonFL(Polinomio &f, double x0, double epsilon, int n, std::vector<double> lambda)
-: Newton(f, x0, epsilon), n(n), lambda(lambda), xw(x0) {}
+NewtonFL::NewtonFL(Polinomio &f, double x0, double epsilon, int n_, std::vector<double> lambda)
+: Newton(f, x0, epsilon), lambda(lambda), xw(x0) {
+    n = n_;
+}
 
 iteracao NewtonFL::iterar() {
     iteracao it{};
@@ -43,4 +45,6 @@ iteracao NewtonFL::iterar() {
     else it.possivelRompimento = 0;
     it.derivadaDeFXw = xw;
     it.modif = mudou;
+
+    return it;
 }

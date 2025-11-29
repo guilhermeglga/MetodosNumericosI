@@ -11,8 +11,8 @@ class Newton {
         //x0 é o valor inicial do isolamento
         Newton(Polinomio &f, double x0, double epsilon);
 
-        virtual iteracao iterar();
-        virtual double derivada(double x);
+        virtual iteracao iterar() = 0;
+        virtual double derivada(double x) = 0;
 
         int get_iteracao_atual();
         double get_xk_atual();
