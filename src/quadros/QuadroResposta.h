@@ -1,6 +1,7 @@
+
 #include <string>
 #include <map>
-#include <vector>
+#include <vector> 
 #include "iteracao.h"
 
 enum NomeMetodo {
@@ -13,7 +14,7 @@ enum NomeMetodo {
 class QuadroResposta{
     public:
         QuadroResposta(NomeMetodo metodo);
-
+        
         void iterar_manual();
         void iterar_total();
 

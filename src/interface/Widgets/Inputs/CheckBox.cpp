@@ -9,10 +9,10 @@ void CheckBox::render(Vector2 scrollOffset){
 }
 
 CheckBox::CheckBox(Rectangle bounds_, string label_)
-    :ScrollableFrame(bounds_) 
+    :ScrollableFrame(bounds_)
 {
     label = label_;
-    state = true;    
+    state = true;
 }
 
 bool CheckBox::get_state()

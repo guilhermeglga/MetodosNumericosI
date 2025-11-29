@@ -1,9 +1,6 @@
 #include "NewtonPadrao.h"
 
-NewtonPadrao::NewtonPadrao(Polinomio &f, double x0, double epsilon) :
-Newton(f, x0, epsilon) {}
-
-void NewtonPadrao::iterar() {
+void Newton::iterar() {
     if(std::abs(f.valor_funcao(xk)) < epsilon)
         return;
     double y = f.valor_funcao(xk);
