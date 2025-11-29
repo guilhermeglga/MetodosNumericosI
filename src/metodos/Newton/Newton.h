@@ -4,7 +4,7 @@
 #include <vector>
 #include <cmath>
 #include "Polinomio.h"
-#include "../iteracao/iteracao.h"
+#include "../../iteracao/iteracao.h"
 
 class Newton {
     public:
