@@ -1,21 +1,6 @@
 #include "NewtonPadrao.h"
 
-/*
-struct iteracao{
-    double raiz;
-    double funcaoNaRaiz;
-    double erroEmX;
-    double erroEmFX;
-    bool parada;
-    bool possivelRompimento; //se a corda rompeu
-
-    // informações para o newtom com FL
-    double derivadaDeFXw;
-    bool modif;
-};
-*/
-
-iteracao Newton::iterar() {
+iteracao NewtonPadrao::iterar() {
     iteracao it{};
 
     double x_anterior = xk;
@@ -46,4 +31,8 @@ iteracao Newton::iterar() {
     else it.possivelRompimento = 0;
     
     return it;
+}
+
+NewtonPadrao::NewtonPadrao(Polinomio &f, double x0, double epsilon)
+    :Newton(f, x0, epsilon){
 }

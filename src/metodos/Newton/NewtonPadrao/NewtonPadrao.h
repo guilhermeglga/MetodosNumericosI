@@ -3,6 +3,11 @@
 
 #include "../Newton.h"
 
-class NewtonPadrao : public Newton {};
+class NewtonPadrao : public Newton {
+    public:
+        iteracao iterar() override;
+
+        NewtonPadrao(Polinomio &f, double x0, double epsilon);
+};
 
 #endif // NEWTONPADRAO_H
