@@ -3,50 +3,44 @@
 NewtonFL::NewtonFL(Polinomio &f, double x0, double epsilon, int n, std::vector<double> lambda)
 : Newton(f, x0, epsilon), n(n), lambda(lambda), xw(x0) {}
 
-void NewtonFL::iterar() {
-    if(std::abs(f.valor_funcao(xk)) < epsilon)
-        return;
+iteracao NewtonFL::iterar() {
+    iteracao it{};
+    double x_anterior = xk;
+    double f_anterior = f.valor_funcao(xk);
+
+    if(std::abs(f_anterior < epsilon)){
+        it.raiz = x_anterior;
+        it.funcaoNaRaiz = f_anterior;
+        it.erroEmX = 0;
+        it.erroEmFX = 0;
+        it.parada = true;
+        if(it.raiz > 0.3) it.possivelRompimento = 0;
+        else it.possivelRompimento = 0;
+        it.derivadaDeFXw = xw;
+        it.modif = false;
+
+        return it;
+    }
     double y = f.valor_funcao(xk);
     double df = derivada(xk);
-    bool val = 1;
+    bool mudou = 0;
     for(int i = 0 ; i < n ; i++){
         if(std::abs(df) <= lambda[i]){
             df = xw;
-            val = 0;
+            mudou = 1;
         }
     }
     xk = xk - y / df;
-    if(val) xw = df;
+    if(!mudou) xw = df;
     iteracao_atual++;
+
+    it.raiz = xk;
+    it.funcaoNaRaiz = y;
+    it.erroEmX = std::abs(xk - x_anterior);
+    it.erroEmFX = std::abs(y - f_anterior);
+    it.parada = false;
+    if(it.raiz > 0.3) it.possivelRompimento = 0;
+    else it.possivelRompimento = 0;
+    it.derivadaDeFXw = xw;
+    it.modif = mudou;
 }
-
-
-//#include "NewtonFL.h"
-//
-//NewtonFL::NewtonFL(Polinomio &f, double x0, double epsilon, int n, vector<double> lambda)
-//: f(f), xk(x0), xw(x0), epsilon(epsilon), iteracao_atual(0), n(n), lambda(lambda) {}
-//
-//void Newton::iterar() {
-//    if(std::abs(f.valor_funcao(xk)) < epsilon)
-//        return;
-//    double y = f.valor_funcao(xk);
-//    double df = derivada(xk);
-//    bool val = 1;
-//    for(int i = 0 ; i < n ; i++){
-//        if(std::abs(df) <= lambda[i]){
-//            df = xw;
-//            val = 0;
-//        }
-//    }
-//    xk = xk - y / df;
-//    if(val) xw = df;
-//    iteracao_atual++;
-//}
-//
-//int Newton::get_iteracao_atual() {
-//    return iteracao_atual;
-//}
-//
-//double Newton::get_xk_atual() {
-//    return xk;
-//}
