@@ -7,11 +7,12 @@ struct iteracao{
     double funcaoNaRaiz;
     double erroEmX;
     double erroEmFX;
-    bool parada;
+    bool parada; //se for true, significa que convergiu
+    bool possivelRompimento; //se a corda rompeu
 
     // informações para o newtom com FL
     double derivadaDeFXw;
-    bool possivelRompimento;
+    bool modif;
 };
 
 #endif

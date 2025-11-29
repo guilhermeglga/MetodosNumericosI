@@ -4,13 +4,14 @@
 #include <vector>
 #include <cmath>
 #include "Polinomio.h"
+#include "../iteracao/iteracao.h"
 
 class Newton {
     public:
         //x0 é o valor inicial do isolamento
         Newton(Polinomio &f, double x0, double epsilon);
 
-        virtual void iterar();
+        virtual iteracao iterar();
         virtual double derivada(double x);
 
         int get_iteracao_atual();
