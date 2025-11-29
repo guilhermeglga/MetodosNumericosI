@@ -30,24 +30,30 @@ iteracao QuadroResposta::getIteracao(int indice){
     return quadro[indice];
 }
 
+int QuadroResposta::getTamanho(){
+    return tamanho;
+}
+
 void QuadroResposta::iterar_manual(){
+    auto ti = std::chrono::high_resolution_clock::now();
 
-    //quadro.push_back(metodo.iterar());
-    num_interacao += 1;
-
-    // ToDo: terminar:
+    quadro.push_back(metodo.iterar());
+    tamanho += 1;
+    
+    auto tf = std::chrono::high_resolution_clock::now();
+    tempo += std::chrono::duration_cast<std::chrono::milliseconds>(tf - ti).count();
 }
 
 void QuadroResposta::iterar_total(int limite){
     bool continuar = true;
 
     auto ti = std::chrono::high_resolution_clock::now();
-    while(continuar && num_interacao < limite){
-        //quadro.push_back(metodo.iterar());
-        continuar ^= quadro[num_interacao].parada;
-        num_interacao += 1;
+    while(continuar && tamanho < limite){
+        quadro.push_back(metodo.iterar());
+        continuar ^= quadro[tamanho].parada;
+        tamanho += 1;
     }
 
     auto tf = std::chrono::high_resolution_clock::now();
-    tempo = std::chrono::duration_cast<std::chrono::milliseconds>(tf - ti).count();
+    tempo += std::chrono::duration_cast<std::chrono::milliseconds>(tf - ti).count();
 }

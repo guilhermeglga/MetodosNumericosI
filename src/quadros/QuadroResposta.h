@@ -35,14 +35,16 @@ class QuadroResposta{
         void iterar_total(int limite);
 
         iteracao getIteracao(int indice);
+        int getTamanho();
         long long getTempo();
+        
     private:
         Newton metodo;
         Polinomio polinomio;
         std::vector <iteracao> quadro;
 
-        int num_interacao = 0;
-        long long tempo;
+        int tamanho = 0;
+        long long tempo = 0;
         
 };
 

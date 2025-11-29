@@ -1,5 +1,5 @@
 #include "QuadroComparativo.h"
-#include <Polinomio.h>
+#include "../iteracao/iteracao.h"
 
 static Newton CriarMetodo(NomeMetodo nome, Polinomio p, double x0, double epsilon, int n, std::vector<double> lambda = std::vector<double>()){
     switch (nome) {
