@@ -1,3 +1,6 @@
+#ifndef QUADROCOMPARATIVO_H
+#define QUADROCOMPARATIVO_H
+
 #include "QuadroResposta.h"
 #include "../iteracao/iteracao.h"
 
@@ -18,3 +21,4 @@ class QuadroComparativo {
         int n;
         std::vector<double> lambda;
 };
+#endif

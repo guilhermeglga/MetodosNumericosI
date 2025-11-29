@@ -1,5 +1,5 @@
-#ifndef iteracao_h
-#define iteracao_h
+#ifndef ITERACAO_H
+#define ITERACAO_H
 
 struct iteracao{
     // informações para ambos os métodos
@@ -10,7 +10,7 @@ struct iteracao{
     bool parada;
 
     // informações para o newtom com FL
-    double derivadaDeFXw; 
+    double derivadaDeFXw;
     bool possivelRompimento;
 };
 

@@ -7,7 +7,7 @@ static Newton CriarMetodo(NomeMetodo nome, Polinomio p, std::vector<double> lamb
         case NEWTON_COM_FL_DER_CALC : return NewtonFLManual(p, 0.0, 0.0, 0, lambda);
         case NEWTON_PADRAO_DER_NCALC : return NewtonPadraoHorner(p, 0.0, 0.0);
         case NEWTON_COM_FL_DER_NCALC : return NewtonFLHorner(p, 0.0, 0.0, 0, lambda);
-            
+
         default: return Newton(p, 0.0, 0.0);
     }
 }
@@ -23,14 +23,22 @@ iteracao QuadroResposta::getIteracao(int indice){
 }
 
 void QuadroResposta::iterar_manual(){
-    metodo.iterar();
-    //ToDo: terminar
+
+    //quadro[num_interacao] = metodo.iterar();
+    num_interacao += 1;
+
+    // ToDo: terminar:
 }
 
 void QuadroResposta::iterar_total(){
     bool continuar = true;
+
+    auto ti = std::chrono::high_resolution_clock::now();
     while(continuar){
-        metodo.iterar();
-        //ToDo: terminar
+        //quadro[num_interacao] = metodo.iterar();
+        num_interacao += 1;
     }
+
+    auto tf = std::chrono::high_resolution_clock::now();
+    tempo = std::chrono::duration_cast<std::chrono::milliseconds>(tf - ti).count();
 }

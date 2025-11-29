@@ -1,7 +1,8 @@
 
-#include <string>
-#include <map>
 #include <vector>
+#include <chrono>
+#include <iostream>
+
 #include "../iteracao/iteracao.h"
 #include "../metodos/Newton/Newton.h"
 #include "../metodos/Newton/NewtonPadrao/NewtonPadraoManual.h";
@@ -15,7 +16,7 @@ enum NomeMetodo {
     NEWTON_PADRAO_DER_CALC,
     NEWTON_COM_FL_DER_CALC,
     NEWTON_PADRAO_DER_NCALC,
-    NEWTON_COM_FL_DER_NCALC 
+    NEWTON_COM_FL_DER_NCALC
 };
 
 class QuadroResposta{
@@ -29,8 +30,7 @@ class QuadroResposta{
         double getTempo();
     private:
         std::vector <iteracao> quadro;
+        int num_interacao = 0;
         Newton metodo;
-        double tempo;
+        long long tempo;
 };
-
-
