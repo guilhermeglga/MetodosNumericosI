@@ -15,6 +15,8 @@ class QuadroComparativo {
         QuadroResposta quadro2;
         std::vector<iteracao> historico1;
         std::vector<iteracao> historico2;
+        long long tempo1;
+        long long tempo2;
         Polinomio polinomio;
         double x0;
         double epsilon;

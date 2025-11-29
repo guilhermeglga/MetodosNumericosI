@@ -39,9 +39,11 @@ void QuadroComparativo::executarcomparacao(int interacao_max) {
     preencherHistorico(quadro1, historico1);
     auto fim_met1 = std::chrono::high_resolution_clock::now();
     auto duracao_met1 = std::chrono::duration_cast<std::chrono::microseconds>(fim_met1 - comeco_met1);
+    tempo1 = duracao_met1;
 
     auto comeco_met2 = std::chrono::high_resolution_clock::now();
     preencherHistorico(quadro2, historico2);
     auto fim_met2 = std::chrono::high_resolution_clock::now();
     auto duracao_met2 = std::chrono::duration_cast<std::chrono::microseconds>(fim_met2 - comeco_met2);
+    tempo2 = duracao_met2;
 }

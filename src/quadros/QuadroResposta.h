@@ -23,7 +23,7 @@ enum NomeMetodo {
 
 class QuadroResposta{
     public:
-        QuadroResposta(NomeMetodo metodo, vector <double> coeficientes, std::vector<double> lambda);
+        QuadroResposta(NomeMetodo metodo, std::vector <double> coeficientes, std::vector<double> lambda);
 
         void iterar_manual();
         void iterar_total();
