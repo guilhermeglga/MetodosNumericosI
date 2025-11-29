@@ -24,4 +24,5 @@ class QuadroComparativo {
         std::vector<double> lambda;
         int interacao_max;
 };
-#endif
+
+#endif // QUADROCOMPARATIVO_H

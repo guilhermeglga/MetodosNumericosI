@@ -1,3 +1,6 @@
+#ifndef POLINOMIO_H
+#define POLINOMIO_H
+
 #include <vector>
 #include <cmath>
 
@@ -18,3 +21,5 @@ class Polinomio {
         std::vector<double> c;
         int n;
 };
+
+#endif // POLINOMIO_H

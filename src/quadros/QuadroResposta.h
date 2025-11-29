@@ -37,4 +37,5 @@ class QuadroResposta{
         long long tempo;
         Polinomio polinomio;
 };
-#endif
+
+#endif // QUADRORESPOSTA_H
