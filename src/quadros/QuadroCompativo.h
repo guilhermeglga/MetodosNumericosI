@@ -1,5 +1,5 @@
 #include "QuadroResposta.h"
-#include "iteracao.h"
+#include "../iteracao/iteracao.h"
 
 class QuadroCompartivo {
     public:

@@ -1,8 +1,8 @@
 
 #include <string>
 #include <map>
-#include <vector> 
-#include "iteracao.h"
+#include <vector>
+#include "../iteracao/iteracao.h"
 
 enum NomeMetodo {
     NEWTON_PADRAO_DER_CALC,
@@ -14,7 +14,7 @@ enum NomeMetodo {
 class QuadroResposta{
     public:
         QuadroResposta(NomeMetodo metodo);
-        
+
         void iterar_manual();
         void iterar_total();
 

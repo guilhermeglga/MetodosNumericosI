@@ -1,5 +1,5 @@
 #include "NewtonPadraoManual.h"
 
-double Newton::derivada(double x) {
+double NewtonPadraoManual::derivada(double x) {
     return f.derivada_manual(x);
 }
