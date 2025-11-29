@@ -30,17 +30,18 @@ void QuadroComparativo::preencherHistorico(QuadroResposta &quadro, std::vector<i
      }
 }
 
-void QuadroComparativo::executarcomparacao() {
-    historico_newton_padrao.clear();
-    historico_newton_fl.clear();
+void QuadroComparativo::executarcomparacao(int interacao_max) {
+    this->interacao_max = interacao_max;
+    historico1.clear();
+    historico2.clear();
 
-    auto start_newton = std::chrono::high_resolution_clock::now();
-    preencherHistorico(quadro_newton_padrao, historico_newton_padrao);
-    auto end_newton = std::chrono::high_resolution_clock::now();
-    auto duration_newton = std::chrono::duration_cast<std::chrono::microseconds>(end_newton - start_newton);
+    auto comeco_met1 = std::chrono::high_resolution_clock::now();
+    preencherHistorico(quadro1, historico1);
+    auto fim_met1 = std::chrono::high_resolution_clock::now();
+    auto duracao_met1 = std::chrono::duration_cast<std::chrono::microseconds>(fim_met1 - comeco_met1);
 
-    auto start_fl = std::chrono::high_resolution_clock::now();
-    preencherHistorico(quadro_newton_fl, historico_newton_fl);
-    auto end_fl = std::chrono::high_resolution_clock::now();
-    auto duration_fl = std::chrono::duration_cast<std::chrono::microseconds>(end_fl - start_fl);
+    auto comeco_met2 = std::chrono::high_resolution_clock::now();
+    preencherHistorico(quadro2, historico2);
+    auto fim_met2 = std::chrono::high_resolution_clock::now();
+    auto duracao_met2 = std::chrono::duration_cast<std::chrono::microseconds>(fim_met2 - comeco_met2);
 }

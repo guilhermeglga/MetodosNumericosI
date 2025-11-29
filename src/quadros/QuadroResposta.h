@@ -1,3 +1,5 @@
+#ifndef QUADRORESPOSTA_H
+#define QUADRORESPOSTA_H
 
 #include <vector>
 #include <chrono>
@@ -21,7 +23,7 @@ enum NomeMetodo {
 
 class QuadroResposta{
     public:
-        QuadroResposta(NomeMetodo metodo, Polinomio p, std::vector<double> lambda);
+        QuadroResposta(NomeMetodo metodo, vector <double> coeficientes, std::vector<double> lambda);
 
         void iterar_manual();
         void iterar_total();
@@ -33,4 +35,6 @@ class QuadroResposta{
         int num_interacao = 0;
         Newton metodo;
         long long tempo;
+        Polinomio polinomio;
 };
+#endif
