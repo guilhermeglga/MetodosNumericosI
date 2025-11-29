@@ -1,46 +1,22 @@
-# Não consegui testar se tá tudo certo no linux
+CXX = g++
+CXXFLAGS = -Wall -g -Isrc -Iinclude -I../deps/include
+LIB_DIR = -L../deps/lib
+LIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+TARGET = CalculadoraDeRaízesDePolinômios
+BUILD_DIR = build
 
-CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -MMD -MP -isystem deps/include
+SRCS = $(shell find src -name "*.cpp")
+OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
 
-INCLUDES = \
-    -I ./deps/include
+all: $(BUILD_DIR)/$(TARGET)
 
-LDFLAGS = \
-    -L ./deps/lib
+$(BUILD_DIR)/$(TARGET): $(OBJS)
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LIB_DIR) $(LIBS)
 
-ifeq ($(OS), Windows_NT)
-	LDFLAGS = \
-    	-L ./deps/lib/windows
-
-	LDLIBS = -lraylib -lgdi32 -lwinmm
-else
-	LDFLAGS = \
-    	-L ./deps/lib
-
-	LDLIBS = -lraylib
-endif
-
-SRC_DIR := src
-BUILD_DIR := build
-
-SRC := $(shell find $(SRC_DIR) -name "*.cpp")
-OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
-DEP := $(OBJ:.o=.d)
-
-TARGET := $(BUILD_DIR)/main
-
-all: $(TARGET)
-
-$(TARGET): $(OBJ)
-	mkdir -p $(BUILD_DIR)
-	$(CXX) $(INCLUDES) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
-
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
-	mkdir -p $(dir $@)
-	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS) $(LDLIBS)
-
--include $(DEP)
+$(BUILD_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(DEP) $(TARGET)
+	rm -rf $(BUILD_DIR)

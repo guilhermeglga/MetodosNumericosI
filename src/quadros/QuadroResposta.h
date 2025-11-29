@@ -1,8 +1,18 @@
+#ifndef QUADRORESPOSTA_H
+#define QUADRORESPOSTA_H
 
-#include <string>
-#include <map>
-#include <vector> 
-#include "iteracao.h"
+#include <vector>
+#include <chrono>
+#include <iostream>
+
+#include "../iteracao/iteracao.h"
+#include "../metodos/Newton/Newton.h"
+#include "../metodos/Newton/NewtonPadrao/NewtonPadraoManual.h";
+#include "../metodos/Newton/NewtonPadrao/NewtonPadraoHorner.h";
+#include "../metodos/Newton/NewtonFL/NewtonFLManual.h";
+#include "../metodos/Newton/NewtonFL/NewtonFLHorner.h";
+#include "../metodos/Newton/Polinomio.h"
+
 
 enum NomeMetodo {
     NEWTON_PADRAO_DER_CALC,
@@ -13,8 +23,8 @@ enum NomeMetodo {
 
 class QuadroResposta{
     public:
-        QuadroResposta(NomeMetodo metodo);
-        
+        QuadroResposta(NomeMetodo metodo, std::vector <double> coeficientes, std::vector<double> lambda);
+
         void iterar_manual();
         void iterar_total();
 
@@ -22,6 +32,10 @@ class QuadroResposta{
         double getTempo();
     private:
         std::vector <iteracao> quadro;
-        // Metodo metodo;
-        double tempo;
+        int num_interacao = 0;
+        Newton metodo;
+        long long tempo;
+        Polinomio polinomio;
 };
+
+#endif // QUADRORESPOSTA_H

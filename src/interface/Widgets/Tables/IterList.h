@@ -1,7 +1,7 @@
 #ifndef UI_ITERLIST_H
 #define UI_ITERLIST_H
 
-#include "../../../iteraçao/iteracao.h"
+#include "../../../iteracao/iteracao.h"
 #include "../Frames/AnimatedFrame.h"
 
 #include <string>
@@ -13,7 +13,7 @@ using namespace std;
 class QuadroResposta{
     public:
         QuadroResposta() {tempo = 0;}
-        
+
         void adicionar(iteracao inter) { quadro.push_back(inter); };
 
         iteracao retornarInteracao(int indice){ return quadro.at(indice); };

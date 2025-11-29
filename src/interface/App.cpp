@@ -3,10 +3,10 @@
 void App::start(){
     InitWindow(width, height, "MN");
     SetTargetFPS(60);
-    
+
     while(!WindowShouldClose()){
         BeginDrawing();
-        
+
             ClearBackground(RAYWHITE);
 
             main_frame.render();

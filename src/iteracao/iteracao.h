@@ -1,5 +1,5 @@
-#ifndef iteracao_h
-#define iteracao_h
+#ifndef ITERACAO_H
+#define ITERACAO_H
 
 struct iteracao{
     // informações para ambos os métodos
@@ -7,11 +7,12 @@ struct iteracao{
     double funcaoNaRaiz;
     double erroEmX;
     double erroEmFX;
-    bool parada;
+    bool parada; //se for true, significa que convergiu
+    bool possivelRompimento; //se a corda rompeu
 
     // informações para o newtom com FL
-    double derivadaDeFXw; 
-    bool possivelRompimento;
+    double derivadaDeFXw;
+    bool modif;
 };
 
 #endif
