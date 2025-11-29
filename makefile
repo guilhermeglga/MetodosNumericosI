@@ -1,13 +1,9 @@
-# Não consegui testar se tá tudo certo no linux
-
 CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -g -Isrc -MMD -MP -isystem deps/include
+CXXFLAGS := -std=c++17 -Wall -Wextra -g -Isrc -MMD -MP 
 
+# Incluindo como sistema pra suprimir as warnings da raygui
 INCLUDES = \
-    -I ./deps/include
-
-LDFLAGS = \
-    -L ./deps/lib
+    -isystem deps/include
 
 ifeq ($(OS), Windows_NT)
 	LDFLAGS = \
@@ -18,7 +14,7 @@ else
 	LDFLAGS = \
     	-L ./deps/lib
 
-	LDLIBS = -lraylib
+	LDLIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 endif
 
 SRC_DIR := src
@@ -28,19 +24,19 @@ SRC := $(shell find $(SRC_DIR) -name "*.cpp")
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 DEP := $(OBJ:.o=.d)
 
-TARGET := $(BUILD_DIR)/main
+TARGET := MetodosNum
 
-all: $(TARGET)
+all: $(BUILD_DIR)/$(TARGET)
 
-$(TARGET): $(OBJ)
-	mkdir -p $(BUILD_DIR)
-	$(CXX) $(INCLUDES) $(OBJ) -o $@ $(LDFLAGS) $(LDLIBS)
+$(BUILD_DIR)/$(TARGET): $(OBJ)
+	@mkdir -p $(BUILD_DIR)
+	$(CXX) $(INCLUDES) -o $@ $(OBJ) $(LDFLAGS) $(LDLIBS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BUILD_DIR)
-	mkdir -p $(dir $@)
-	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS) $(LDLIBS)
+	@mkdir -p $(dir $@)
+	$(CXX) $(INCLUDES) $(CXXFLAGS) -c $< -o $@
 
 -include $(DEP)
 
 clean:
-	rm -f $(OBJ) $(DEP) $(TARGET)
+	rm -f $(OBJ) $(DEP) $(BUILD_DIR)/$(TARGET)
