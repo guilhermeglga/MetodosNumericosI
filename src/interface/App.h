@@ -1,8 +1,7 @@
 #ifndef UI_APP_H
 #define UI_APP_H
 
-#include "./Window/Window.h"
-#include "./MainFrame/MainFrame.h"
+#include "./Pages/MainFrame/MainFrame.h"
 
 // Classe Principal da UI(A main da UI basicamente)
 class App{
@@ -12,8 +11,10 @@ class App{
         App(int width_, int height_);
 
     private:
-        Window window;
+        int width, height;
         MainFrame main_frame;
+
+        ControlFlow flow;
 };
 
 /* ToDo da UI:

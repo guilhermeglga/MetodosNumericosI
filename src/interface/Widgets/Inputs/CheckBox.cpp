@@ -1,7 +1,5 @@
 #include "CheckBox.h"
 
-#include <iostream>
-
 void CheckBox::render(Vector2 scrollOffset){
     ScrollableFrame::render(scrollOffset);
 

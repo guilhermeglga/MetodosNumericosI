@@ -1,7 +1,7 @@
 #include "App.h"
 
 void App::start(){
-    InitWindow(window.get_width(), window.get_height(), "MN");
+    InitWindow(width, height, "MN");
     SetTargetFPS(60);
     
     while(!WindowShouldClose()){
@@ -18,4 +18,8 @@ void App::start(){
 }
 
 App::App(int width_, int height_)
-: window(width_, height_) {}
+    : main_frame({0, 0, (float)width_, (float)height_}, &flow)
+{
+    width = width_;
+    height = height_;
+}

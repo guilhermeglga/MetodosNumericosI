@@ -1,18 +1,20 @@
 #include "MainFrame.h"
 
-#include "../Widgets/Gradient.h"
+/*#include "../Widgets/Gradient.h"
 #include "../Widgets/Inputs/NumberEntry.h"
 #include "../Widgets/Inputs/Button.h"
 #include "../Widgets/Label.h"
 #include "../Widgets/Inputs/CheckBox.h"
 #include "../Widgets/Tables/IterList.h"
 
-#include <string>
+#include <string>*/
 
-MainFrame::MainFrame()
-    : scrollPanel({0, 0, 1080, 720}),
-    fixedButton({0, 0, 0, 0}, "", []{}) // Gambiarra, mas é só pra testar tbm
+MainFrame::MainFrame(Rectangle bounds_, ControlFlow* flow_)
+    : Page(bounds_, flow_),
+    in_frame(bounds_, flow_),
+    out_frame(bounds_, flow_)
 {
+    /*
     // Quadro temporario, só pra testar
     iteracao iter1;
     iteracao iter2;
@@ -56,7 +58,7 @@ MainFrame::MainFrame()
         }
     );
 
-    /*for(float i = 1; i <= 20; i++){ // Teste de inputs
+    for(float i = 1; i <= 20; i++){ // Teste de inputs
         scrollPanel.append_child(new NumberEntry({50, 50*i}));
 
         scrollPanel.append_child(new Button({300, 50*i, 75, 20}, "Botao", 
@@ -77,6 +79,7 @@ MainFrame::MainFrame()
 }
 
 void MainFrame::render(){
-    scrollPanel.render();
-    fixedButton.render({0, 0});
+    //Page::render(); // Not needed here because we dont add anything to MainFrame's scrollPanel;
+    if(get_cur_frame() == INPUTFRAME) in_frame.render();
+    else out_frame.render();
 }
