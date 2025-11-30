@@ -1,5 +1,6 @@
 #define RAYGUI_IMPLEMENTATION
 #include <iostream> 
+#include <stdexcept>
 
 #include "./interface/App.h"
 #include "./quadros/QuadroComparativo.h"
@@ -10,7 +11,7 @@ int main(){
    cout << "Bem vindo! Digite o número de funções a serem inseridas: ";
    cin >> n;
    bool modo;
-   cout << "\nDigite agora o modo da função (0: função generica, 1: a3x^3 - 9a2x + 3)";
+   cout << "\nDigite agora o modo da função (0: função generica, 1: a3x^3 - 9a2x + 3): ";
    cin >> modo;
    vector <QuadroComparativo*> quadros;
    
@@ -32,13 +33,17 @@ int main(){
       double epsilon, lambda; int limite;
       cin >> epsilon >> lambda >> limite;
 
-      quadros.push_back(&QuadroComparativo({a3, a2, a1, a0}, epsilon, lambda, limite));
+      try {
+         QuadroComparativo quadro = QuadroComparativo({a3, a2, a1, a0}, epsilon, lambda, limite);
+         quadros.push_back(&quadro);
+      } catch (std::runtime_error e) {
+         cout << "\nErro na construção da função: " << e.what();
+      }
       cout << "\n";
    }
 
-   App app(1080, 720);
+   //App app(1080, 720);
 
-   app.start();
-
+   //app.start();
    return 0;
 }

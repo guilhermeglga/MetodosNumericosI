@@ -6,6 +6,7 @@
 #include <string>
 
 
+
 class QuadroComparativo {
     public:
         QuadroComparativo(std::vector<double> coeficientes, double epsilon, double lambda, int interacao_max);
