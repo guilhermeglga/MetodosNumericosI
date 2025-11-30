@@ -27,6 +27,8 @@ double Polinomio::derivada_manual(double x) {
 double Polinomio::derivada_horner(double x) {
     if(n == 1) return 0;
 
+    valor_funcao(x);
+    
     c[n-1] = b[n-1];
     for (int i = n-2; i >= 1; i--) {
         c[i] = b[i] + c[i+1] * x;
@@ -54,12 +56,12 @@ double Polinomio::isolamento() {
 
     double xa = 0, xb = 0;
     while(true){
-        double a = valor_funcao(xa);
-        double b = valor_funcao(xb);
+        double fa = valor_funcao(xa);
+        double fb = valor_funcao(xb);
 
-        if(a * b < 0) {
+        if(fa * fb < 0) {
             //a mudou ou b mudou
-            if(a * valor_funcao(xa + 0.5) < 0) return (xa + 0.25);
+            if(fa * valor_funcao(xa + 0.5) < 0) return (xa + 0.25);
             return (xb - 0.25);
         }
 
