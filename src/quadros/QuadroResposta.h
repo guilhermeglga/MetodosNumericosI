@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <chrono>
-#include <iostream>
 
 #include "../iteracao/iteracao.h"
 #include "../metodos/Newton/Newton.h"
@@ -26,9 +25,8 @@ class QuadroResposta{
         QuadroResposta(
             NomeMetodo metodo, 
             std::vector <double> coeficientes, 
-            double epsilon, 
-            std::vector<double> lambda = {},
-            int lambda_size = 0
+            double epsilon,
+            double lambda
         );
 
         void iterar_manual();

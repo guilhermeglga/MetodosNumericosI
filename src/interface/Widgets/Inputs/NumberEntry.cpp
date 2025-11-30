@@ -18,18 +18,24 @@ void NumberEntry::render(Vector2 scrollOffset){
             strcpy(text, lastValidated);
         }
     }
-    //DrawTextEx(GuiGetFont(), text.c_str(), {offsetBounds.x + 8, offsetBounds.y + 8}, 24, 2, BLACK);
 }
 
-float NumberEntry::get_cur_num(){
+double NumberEntry::get_cur_num(){
     return cur_num;
 }
 
-NumberEntry::NumberEntry(Vector2 pos_)
+void NumberEntry::set_callback(std::function<void()> callback_){
+    callback = callback_;
+}
+
+NumberEntry::NumberEntry(Vector2 pos_, string title_, function<void()> callback_)
     : ScrollableFrame({pos_.x, pos_.y, 200, 32})
 {
     cur_num = 0;
     editMode = false;
+
+    title = title_;
+    callback = callback_;
 }
 
 bool NumberEntry::validate_input()
@@ -42,5 +48,6 @@ bool NumberEntry::validate_input()
         if(dot_num > 1 || (c != 0 && c!=46 && c!=44 && (c < 48 || c > 57))) return false;
     }
 
+    callback();
     return true;
 }

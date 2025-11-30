@@ -1,8 +1,8 @@
 #include "QuadroComparativo.h"
 
-QuadroComparativo::QuadroComparativo(NomeMetodo metodo1, NomeMetodo metodo2, std::vector<double> coeficientes, double epsilon, int n, std::vector<double> lambda): 
-    quadro1(metodo1, coeficientes, epsilon, lambda, n),
-    quadro2(metodo2, coeficientes, epsilon, lambda, n) {}
+QuadroComparativo::QuadroComparativo(NomeMetodo metodo1, NomeMetodo metodo2, std::vector<double> coeficientes, double epsilon, double lambda): 
+    quadro1(metodo1, coeficientes, epsilon, lambda),
+    quadro2(metodo2, coeficientes, epsilon, lambda) {}
 
 void QuadroComparativo::executarComparacao(int interacao_max) {
     quadro1.iterar_total(interacao_max);
