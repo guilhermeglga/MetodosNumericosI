@@ -1,14 +1,14 @@
 #include "../quadros/QuadroResposta.h"
 
 
-static Newton* CriarMetodo(NomeMetodo nome, Polinomio p, double epsilon, std::vector<double> lambda, int lambda_size){
+static Newton* CriarMetodo(NomeMetodo nome, Polinomio p, double epsilon, double lambda){
     double x0 = p.isolamento();
 
     switch (nome) {
         case NEWTON_PADRAO_DER_CALC : return new NewtonPadraoManual(p, x0, epsilon);
-        case NEWTON_COM_FL_DER_CALC : return new NewtonFLManual(p, x0, epsilon, lambda_size, lambda);
+        case NEWTON_COM_FL_DER_CALC : return new NewtonFLManual(p, x0, epsilon, lambda);
         case NEWTON_PADRAO_DER_NCALC : return new NewtonPadraoHorner(p, x0, epsilon);
-        case NEWTON_COM_FL_DER_NCALC : return new NewtonFLHorner(p, x0, epsilon, lambda_size, lambda);
+        case NEWTON_COM_FL_DER_NCALC : return new NewtonFLHorner(p, x0, epsilon, lambda);
 
         default: return new NewtonPadraoManual(p, x0, epsilon);
     }
@@ -18,11 +18,10 @@ QuadroResposta::QuadroResposta(
     NomeMetodo nome, 
     std::vector <double> coeficientes, 
     double epsilon,
-    std::vector<double> lambda,
-    int lambda_size
+    double lambda
 ) : polinomio(coeficientes) 
 {
-    metodo = CriarMetodo(nome, polinomio, epsilon, lambda, lambda_size);
+    metodo = CriarMetodo(nome, polinomio, epsilon, lambda);
 }
 
 long long QuadroResposta::getTempo() {

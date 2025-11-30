@@ -7,7 +7,7 @@
 
 class QuadroComparativo {
     public:
-        QuadroComparativo(NomeMetodo metodo1, NomeMetodo metodo2, std::vector<double> coeficientes, double epsilon, int n, std::vector<double> lambda);
+        QuadroComparativo(NomeMetodo metodo1, NomeMetodo metodo2, std::vector<double> coeficientes, double epsilon, double lambda);
 
         void executarComparacao(int interacao_max);
         std::pair<int,int> tamanhosQuadros();
