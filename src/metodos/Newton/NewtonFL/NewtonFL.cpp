@@ -18,7 +18,7 @@ iteracao NewtonFL::iterar() {
     it.erroEmX = std::abs(xk - x_anterior);
     it.erroEmFX = std::abs(y - f_anterior);
 
-    if(std::abs(f_anterior) < epsilon || std::abs(xk - x_anterior) < epsilon)
+    if(std::abs(y) < epsilon || std::abs(xk - x_anterior) < epsilon)
         it.parada = true;
     else
         it.parada = false;
@@ -27,7 +27,7 @@ iteracao NewtonFL::iterar() {
         it.possivelRompimento = 1;
     else
         it.possivelRompimento = 0;
-    
+
     bool mudou = 0;
     if(std::abs(df) <= lambda){
         df = xw;
@@ -39,6 +39,6 @@ iteracao NewtonFL::iterar() {
     it.modif = mudou;
 
     iteracao_atual++;
-    
+
     return it;
 }
