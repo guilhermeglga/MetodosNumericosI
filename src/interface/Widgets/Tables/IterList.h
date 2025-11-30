@@ -1,11 +1,15 @@
 #ifndef UI_ITERLIST_H
 #define UI_ITERLIST_H
+
 #include "../../../quadros/QuadroComparativo.h"
 #include "../../../iteracao/iteracao.h"
 #include "../Frames/AnimatedFrame.h"
 
 #include <string>
 #include <vector>
+
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -36,7 +40,7 @@ class IterList : public AnimatedFrame{
         QuadroComparativo* board;
         QuadroResposta* resps[4];
 
-        void drawCell(Vector2 pos, string text);
+        void drawCell(Vector2 pos, string text, Color color);
         void drawHeaders(Rectangle offsetBounds);
 };
 
