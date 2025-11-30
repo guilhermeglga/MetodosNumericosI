@@ -59,10 +59,10 @@ IterList::IterList(Rectangle bounds_, QuadroComparativo* board_, Font* font_, st
     font = font_;
     title = title_;
 
-    resps[0] = board_->QPadrao_M;
-    resps[1] = board_->QFL_M;
-    resps[2] = board_->QPadrao_H;
-    resps[3] = board_->QFL_H;
+    resps[0] = &board_->QPadrao_M;
+    resps[1] = &board_->QFL_M;
+    resps[2] = &board_->QPadrao_H;
+    resps[3] = &board_->QFL_H;
 
     bounds.height = 25*UI_TABLE_CELL_HEIGHT; // (5 propriedades)*4 tabelas + 1 celula vazia
     bounds.width = (board_->tam_max() + 1)*UI_TABLE_CELL_WIDTH; // tamanho do quadro + 1 celula vazia

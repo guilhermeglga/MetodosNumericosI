@@ -19,14 +19,9 @@ QuadroResposta::QuadroResposta(
     std::vector <double> coeficientes, 
     double epsilon,
     double lambda
-) 
+) : polinomio(coeficientes)
 {
-    try{
-        polinomio = new Polinomio(coeficientes);
-    }catch(std::runtime_error &e){
-        throw e;
-    }
-    metodo = CriarMetodo(nome, *polinomio, epsilon, lambda);
+    metodo = CriarMetodo(nome, polinomio, epsilon, lambda);
 }
 
 long long QuadroResposta::getTempo() {
@@ -52,12 +47,13 @@ void QuadroResposta::iterar_manual(){
 }
 
 void QuadroResposta::iterar_total(int limite){
-    bool continuar = true;
+    bool parar = false;
 
     auto ti = std::chrono::high_resolution_clock::now();
-    while(continuar && tamanho < limite){
-        quadro.push_back(metodo->iterar());
-        continuar ^= quadro[tamanho].parada;
+    while(!parar && tamanho < limite){
+        iteracao iter = metodo->iterar();
+        quadro.push_back(iter);
+        parar = iter.parada;
         tamanho += 1;
     }
 
