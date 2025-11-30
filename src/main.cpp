@@ -34,7 +34,7 @@ int main(){
       cin >> epsilon >> lambda >> limite;
 
       try {
-         QuadroComparativo quadro = QuadroComparativo({a3, a2, a1, a0}, epsilon, lambda, limite);
+         QuadroComparativo quadro = QuadroComparativo({a0, a1, a2, a3}, epsilon, lambda, limite);
          quadros.push_back(&quadro);
       } catch (std::runtime_error &e) {
          cout << "\nErro na construção da função: " << e.what();
@@ -42,8 +42,11 @@ int main(){
       cout << "\n";
    }
 
-   App app(1080, 720, &quadros);
+   if(quadros.size() != 0){
+        App app(1080, 720, &quadros);
 
-   app.start();
+        app.start();
+   }
+
    return 0;
 }

@@ -36,7 +36,7 @@ double Polinomio::derivada_horner(double x) {
 
 bool Polinomio::raiz_real(){ //verifica se possui raizes reais
     double eps = 1e-12;
-    if(fabs(a[3]) > 0) return true; //funcoes de grau impar sempre tem raiz
+    if(fabs(a[3]) > eps) return true; //funcoes de grau impar sempre tem raiz
     else if(fabs(a[2]) <= eps && fabs(a[1]) > eps) return true;
     else if(fabs(a[3]) <= eps && fabs(a[2]) <= eps && fabs(a[1]) <= eps && fabs(a[0]) > eps) return false;
 
