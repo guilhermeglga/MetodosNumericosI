@@ -35,9 +35,10 @@ double Polinomio::derivada_horner(double x) {
 }
 
 bool Polinomio::raiz_real(){ //verifica se possui raizes reais
-    if(a[3] != 0) return true; 
-    else if(a[2] == 0 && a[1] != 0) return true;
-    else if(a[3] == 0 && a[2] == 0 && a[1] == 0 && a[0] != 0) return false;
+    double eps = 1e-12;
+    if(fabs(a[3]) > 0) return true; //funcoes de grau impar sempre tem raiz
+    else if(fabs(a[2]) <= eps && fabs(a[1]) > eps) return true;
+    else if(fabs(a[3]) <= eps && fabs(a[2]) <= eps && fabs(a[1]) <= eps && fabs(a[0]) > eps) return false;
 
     //se nao entrou em nenhum if, é uma função do segundo grau
     //basta calcular o discriminante (delta)
@@ -47,7 +48,8 @@ bool Polinomio::raiz_real(){ //verifica se possui raizes reais
 }
 
 double Polinomio::isolamento() {
-    if(a[3] == 0 && a[2] == 0 && a[1] == 0 && a[0] == 0) return 0; 
+    double eps = 1e-12;
+    if(fabs(a[3]) <= eps && fabs(a[2]) <= eps && fabs(a[1]) <= eps && fabs(a[0]) <= eps) return 0;
     if(raiz_real() == false) throw std::runtime_error("Sem raizes reais");
 
     double xa = 0, xb = 0;
