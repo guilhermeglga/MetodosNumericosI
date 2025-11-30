@@ -17,6 +17,7 @@ class Page : public Frame{
         void set_cur_frame(VisibleFrame frame_);
 
         void append_child(ScrollableFrame* child_);
+        void remove_child(ScrollableFrame* child_);
         void update_content_rec();
     private:
         ScrollPanel scrollPanel;

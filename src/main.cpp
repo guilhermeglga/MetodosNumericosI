@@ -2,9 +2,12 @@
 #include "./interface/App.h"
 
 int main(){
-   App app(1080, 720);
+    //Quadro temporario, só pra testar
+    QuadroComparativo* board = new QuadroComparativo({1.0, 0, -9.0, 3.0}, 0.001, 0.05, 10);
 
-   app.start();
+    App app(1080, 720, board);
 
-   return 0;
+    app.start();
+
+    return 0;
 }

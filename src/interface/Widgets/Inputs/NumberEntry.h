@@ -2,8 +2,11 @@
 #define UI_NUMBERENTRY_H
 
 #include "../Frames/ScrollableFrame.h"
+#include "../Label.h"
+
 #include <cstdlib>
 #include <functional>
+#include <string.h>
 #include <string>
 
 /* ToDo:
@@ -23,15 +26,15 @@ class NumberEntry : public ScrollableFrame{
         double get_cur_num();
 
         // Callback chamado quando o novo número é validado
-        void set_callback(function<void()> callback_);
+        void set_callback(function<void(double num)> callback_);
 
-        NumberEntry(Vector2 pos_, string title_, function<void()> callback_);
+        NumberEntry(Vector2 pos_, string title_, function<void(double num)> callback_);
 
     private:
         double cur_num;
         string title;
 
-        std::function<void()> callback;
+        Label label;
 
         // Usando vetor de char no lugar de uma string pq a raygui não aceita string
         char lastValidated[UI_MAX_NUMBER_DIGITS] = "0";
@@ -39,7 +42,7 @@ class NumberEntry : public ScrollableFrame{
 
         bool editMode;
 
-        function<void()> callback;
+        function<void(double num)> callback;
 
         bool validate_input();
 };

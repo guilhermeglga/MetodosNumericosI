@@ -7,13 +7,13 @@ void IntEntry::render(Vector2 scrollOffset){
 
     Rectangle offsetBounds = get_offset_bounds();
 
-    if(GuiValueBox(offsetBounds, "test", &cur_num, 0, 100, editMode)){
+    if(GuiValueBox(offsetBounds, title.c_str(), &cur_num, 0, 100, editMode)){
         editMode = !editMode;
 
         if(cur_num > max_num) cur_num = max_num;
         else if (cur_num < min_num) cur_num = min_num;
 
-        callback();
+        callback(cur_num);
     }
 }
 
@@ -22,11 +22,11 @@ int IntEntry::get_cur_num()
     return cur_num;
 }
 
-void IntEntry::set_callback(function<void()> callback_){
+void IntEntry::set_callback(function<void(int num)> callback_){
     callback = callback_;
 }
 
-IntEntry::IntEntry(Vector2 pos_, string title_, int min_num_, int max_num_, function<void()> callback_)
+IntEntry::IntEntry(Vector2 pos_, string title_, int min_num_, int max_num_, function<void(int num)> callback_)
     :ScrollableFrame({pos_.x, pos_.y, 200, 32})
 {
     cur_num = 0;
