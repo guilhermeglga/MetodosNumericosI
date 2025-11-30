@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -g -Isrc -MMD -MP 
+CXXFLAGS := -std=c++17 -Wall -Wextra -g -Isrc -MMD -MP
 
 # Incluindo como sistema pra suprimir as warnings da raygui
 INCLUDES = \
@@ -20,7 +20,7 @@ endif
 SRC_DIR := src
 BUILD_DIR := build
 
-SRC := $(shell find $(SRC_DIR) -name "*.cpp")
+SRC := $(shell find $(SRC_DIR) -name "*.cpp" -not -path "**/interface/*" -not -name main.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 DEP := $(OBJ:.o=.d)
 
