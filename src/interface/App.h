@@ -8,7 +8,7 @@ class App{
     public:
         void start();
 
-        App(int width_, int height_);
+        App(int width_, int height_, QuadroComparativo* quadro);
 
     private:
         int width, height;

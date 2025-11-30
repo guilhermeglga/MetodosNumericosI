@@ -10,4 +10,22 @@ QuadroComparativo::QuadroComparativo(std::vector<double> coeficientes, double ep
         QPadrao_H.iterar_total(interacao_max);
         QFL_M.iterar_total(interacao_max);
         QFL_H.iterar_total(interacao_max);
+
+        nomes_prop = {"x", "f(x)", "Err x", "Err f(x)", "Parada", "Rompimento"};
     }
+
+int QuadroComparativo::tam_max()
+{
+    int maior = QPadrao_M.getTamanho();
+
+    if(QPadrao_H.getTamanho() > maior) maior = QPadrao_H.getTamanho();
+    if(QFL_H.getTamanho() > maior) maior = QFL_H.getTamanho();
+    if(QFL_M.getTamanho() > maior) maior = QFL_M.getTamanho();
+
+    return maior;
+}
+
+std::string QuadroComparativo::get_nome_prop(int i)
+{
+    return nomes_prop.at(i%nomes_prop.size());
+}

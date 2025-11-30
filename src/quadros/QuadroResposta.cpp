@@ -19,7 +19,7 @@ QuadroResposta::QuadroResposta(
     std::vector <double> coeficientes, 
     double epsilon,
     double lambda
-) : polinomio(coeficientes) 
+) : polinomio(coeficientes)
 {
     metodo = CriarMetodo(nome, polinomio, epsilon, lambda);
 }

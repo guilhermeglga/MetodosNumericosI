@@ -14,9 +14,9 @@ class IntEntry : public ScrollableFrame{
         int get_cur_num();
 
         // callback chamado quando o número muda
-        void set_callback(function<void()> callback_);
+        void set_callback(function<void(int num)> callback_);
 
-        IntEntry(Vector2 pos_, string title_, int min_num_, int max_num_, function<void()> callback_);
+        IntEntry(Vector2 pos_, string title_, int min_num_, int max_num_, function<void(int num)> callback_);
 
     private:
         int cur_num, min_num, max_num;
@@ -24,7 +24,7 @@ class IntEntry : public ScrollableFrame{
 
         bool editMode;
 
-        function<void()> callback;
+        function<void(int num)> callback;
 };
 
 #endif // UI_INTENTRY_H

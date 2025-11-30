@@ -17,8 +17,8 @@ void App::start(){
     CloseWindow();
 }
 
-App::App(int width_, int height_)
-    : main_frame({0, 0, (float)width_, (float)height_}, &flow)
+App::App(int width_, int height_, QuadroComparativo* quadro)
+    : main_frame({0, 0, (float)width_, (float)height_}, &flow, quadro)
 {
     width = width_;
     height = height_;

@@ -8,7 +8,12 @@ void Label::render(Vector2 scrollOffset){
     GuiLabel(offsetBounds, text.c_str());
 }
 
-Label::Label(Rectangle bounds_)
+void Label::set_text(string text_){
+    text = text_;
+}
+
+Label::Label(Rectangle bounds_, string text_)
     :ScrollableFrame(bounds_)
 {
+    text = text_;
 }
