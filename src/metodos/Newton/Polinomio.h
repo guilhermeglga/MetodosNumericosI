@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cmath>
+#include <stdexcept>
 
 class Polinomio {
     public:
@@ -12,6 +13,7 @@ class Polinomio {
         double derivada_manual(double x);
         double derivada_horner(double x);
         
+        bool raiz_real();
         double isolamento();
 
     private:

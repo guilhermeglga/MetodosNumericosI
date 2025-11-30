@@ -34,7 +34,22 @@ double Polinomio::derivada_horner(double x) {
     return c[1];
 }
 
+bool Polinomio::raiz_real(){ //verifica se possui raizes reais
+    if(a[3] != 0) return true; 
+    else if(a[2] == 0 && a[1] != 0) return true;
+    else if(a[3] == 0 && a[2] == 0 && a[1] == 0 && a[0] != 0) return false;
+
+    //se nao entrou em nenhum if, é uma função do segundo grau
+    //basta calcular o discriminante (delta)
+    double d = a[1]*a[1] - 4*a[2]*a[0];
+    if(d < 0) return false;
+    else return true;
+}
+
 double Polinomio::isolamento() {
+    if(a[3] == 0 && a[2] == 0 && a[1] == 0 && a[0] == 0) return 0; 
+    if(raiz_real() == false) throw std::runtime_error("Sem raizes reais");
+
     double xa = 0, xb = 0;
     while(true){
         double a = valor_funcao(xa);
