@@ -23,7 +23,8 @@ int main(){
       quadros.push_back(QuadroComparativo({a3, a2, a1, a0}, epsilon, lambda, limite));
    }
    
-   App app(1080, 720);
+   QuadroComparativo* board = new QuadroComparativo({1.0, -9.0, 0.0, 1.0}, 0.001, 0.1, 10);
+   App app(1080, 720, &quadros[0]);
 
    app.start();
 
