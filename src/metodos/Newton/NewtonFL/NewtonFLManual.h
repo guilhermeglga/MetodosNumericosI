@@ -5,7 +5,7 @@
 
 class NewtonFLManual : public NewtonFL {
     public:
-        NewtonFLManual(Polinomio &f, double x0, double epsilon, int n, std::vector<double> lambda);
+        NewtonFLManual(Polinomio &f, double x0, double epsilon, double lambda);
         double derivada(double x) override;
 };
 

@@ -1,9 +1,7 @@
 #include "NewtonFL.h"
 
-NewtonFL::NewtonFL(Polinomio &f, double x0, double epsilon, int n_, std::vector<double> lambda)
-: Newton(f, x0, epsilon), lambda(lambda), xw(x0) {
-    n = n_;
-}
+NewtonFL::NewtonFL(Polinomio &f, double x0, double epsilon, double lambda)
+: Newton(f, x0, epsilon), lambda(lambda), xw(x0) {}
 
 iteracao NewtonFL::iterar() {
     iteracao it{};
@@ -26,11 +24,9 @@ iteracao NewtonFL::iterar() {
     double y = f.valor_funcao(xk);
     double df = derivada(xk);
     bool mudou = 0;
-    for(int i = 0 ; i < n ; i++){
-        if(std::abs(df) <= lambda[i]){
-            df = xw;
-            mudou = 1;
-        }
+    if(std::abs(df) <= lambda){
+        df = xw;
+        mudou = 1;
     }
     xk = xk - y / df;
     if(!mudou) xw = df;

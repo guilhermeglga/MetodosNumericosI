@@ -5,12 +5,10 @@
 
 class NewtonFL : public Newton {
     public:
-        NewtonFL(Polinomio &f, double x0, double epsilon, int n_, std::vector<double> lambda);
+        NewtonFL(Polinomio &f, double x0, double epsilon, double lambda);
         iteracao iterar() override;
     protected:
-       std::vector<double> lambda;
-       int n;
-       double xw;
+       double lambda, xw;
 };
 
 #endif // NEWTONFL_H
