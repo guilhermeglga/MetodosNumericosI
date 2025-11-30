@@ -14,7 +14,7 @@ else
 	LDFLAGS = \
     	-L ./deps/lib
 
-	LDLIBS = -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+	LDLIBS = ./deps/lib/libraylib.a
 endif
 
 SRC_DIR := src
