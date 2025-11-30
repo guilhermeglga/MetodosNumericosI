@@ -4,18 +4,16 @@
 #include "QuadroResposta.h"
 #include "../iteracao/iteracao.h"
 #include <utility>
+#include <map>
 
 class QuadroComparativo {
     public:
-        QuadroComparativo(NomeMetodo metodo1, NomeMetodo metodo2, std::vector<double> coeficientes, double epsilon, double lambda);
-
-        void executarComparacao(int interacao_max);
-        std::pair<int,int> tamanhosQuadros();
-        std::pair<iteracao*,iteracao*> getIteracoes(int i);
+        QuadroComparativo(std::vector<double> coeficientes, double epsilon, double lambda, int interacao_max);
     
-    private:
-        QuadroResposta quadro1;
-        QuadroResposta quadro2;
+        QuadroResposta QPadrao_M; // manual
+        QuadroResposta QPadrao_H; // horner
+        QuadroResposta QFL_M;
+        QuadroResposta QFL_H;
 };
 
 #endif // QUADROCOMPARATIVO_H

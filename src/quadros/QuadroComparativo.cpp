@@ -1,35 +1,13 @@
 #include "QuadroComparativo.h"
 
-QuadroComparativo::QuadroComparativo(NomeMetodo metodo1, NomeMetodo metodo2, std::vector<double> coeficientes, double epsilon, double lambda): 
-    quadro1(metodo1, coeficientes, epsilon, lambda),
-    quadro2(metodo2, coeficientes, epsilon, lambda) {}
-
-void QuadroComparativo::executarComparacao(int interacao_max) {
-    quadro1.iterar_total(interacao_max);
-    quadro2.iterar_total(interacao_max);
-}
-
-std::pair<int,int> QuadroComparativo::tamanhosQuadros(){
-    std::pair<int,int> tamanhos(quadro1.getTamanho(),quadro2.getTamanho());
-    return tamanhos;
-}
-
-std::pair<iteracao*,iteracao*> QuadroComparativo::getIteracoes(int i){
-    std::pair<iteracao*,iteracao*> iteracoes;
-    int tamanho1 = tamanhosQuadros().first;
-    int tamanho2 = tamanhosQuadros().second;
-    if (i > tamanho1){
-        iteracao iter = quadro1.getIteracao(i);
-        iteracao* iterptr = new iteracao(iter);
-        iteracoes.first = iterptr;
-    }else{
-        iteracoes.first = nullptr;
-    }if (i > tamanho2){
-        iteracao iter = quadro2.getIteracao(i);
-        iteracao* iterptr = new iteracao(iter);
-        iteracoes.second = iterptr;
-    }else{
-        iteracoes.second = nullptr;
+QuadroComparativo::QuadroComparativo(std::vector<double> coeficientes, double epsilon, double lambda, int interacao_max): 
+    QPadrao_M(NEWTON_PADRAO_DER_CALC, coeficientes, epsilon, lambda),
+    QPadrao_H(NEWTON_PADRAO_DER_NCALC, coeficientes, epsilon, lambda),
+    QFL_M(NEWTON_COM_FL_DER_CALC, coeficientes, epsilon, lambda),
+    QFL_H(NEWTON_COM_FL_DER_NCALC, coeficientes, epsilon, lambda)
+    {
+        QPadrao_M.iterar_total(interacao_max);
+        QPadrao_H.iterar_total(interacao_max);
+        QFL_M.iterar_total(interacao_max);
+        QFL_H.iterar_total(interacao_max);
     }
-    return iteracoes;
-}
