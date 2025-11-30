@@ -1,5 +1,7 @@
 #include "IterList.h"
 
+#define UI_PRECISION_NUMBERS 12
+
 void IterList::render(Vector2 scrollOffset){
     AnimatedFrame::render(scrollOffset);
 
@@ -18,13 +20,36 @@ void IterList::render(Vector2 scrollOffset){
             /*if(i == tamanhoQuadro-1 && animFrames > 0){
                 y = y - animFrames*2;
             }*/
+            unsigned char val = (unsigned char)(100 + q*(155/4));
+            Color cellColor = {val, val, val, 255};
 
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 1*UI_TABLE_CELL_HEIGHT}, to_string(iter.raiz));
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 2*UI_TABLE_CELL_HEIGHT}, to_string(iter.funcaoNaRaiz));
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 3*UI_TABLE_CELL_HEIGHT}, to_string(iter.erroEmX));
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 4*UI_TABLE_CELL_HEIGHT}, to_string(iter.erroEmFX));
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 5*UI_TABLE_CELL_HEIGHT}, to_string(iter.parada));
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 6*UI_TABLE_CELL_HEIGHT}, to_string(iter.possivelRompimento));
+            string s;
+
+            ostringstream raizStream;
+            raizStream << fixed << setprecision(UI_PRECISION_NUMBERS) << iter.raiz;
+            s = raizStream.str();
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 1*UI_TABLE_CELL_HEIGHT}, s, cellColor);
+
+            ostringstream fxStream;
+            fxStream << fixed << setprecision(UI_PRECISION_NUMBERS) << iter.funcaoNaRaiz;
+            s = fxStream.str();
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 2*UI_TABLE_CELL_HEIGHT}, s, cellColor);
+
+            ostringstream errxStream;
+            errxStream << fixed << setprecision(UI_PRECISION_NUMBERS) << iter.erroEmX;
+            s = errxStream.str();
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 3*UI_TABLE_CELL_HEIGHT}, s, cellColor);
+
+            ostringstream errfxStream;
+            errfxStream << fixed << setprecision(UI_PRECISION_NUMBERS) << iter.erroEmFX;
+            s = errfxStream.str();
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 4*UI_TABLE_CELL_HEIGHT}, s, cellColor);
+            
+            s = iter.parada?"SIM":"NÃO";
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 5*UI_TABLE_CELL_HEIGHT}, s, cellColor);
+
+            s = iter.possivelRompimento?"SIM":"NÃO";
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 6*UI_TABLE_CELL_HEIGHT}, s, cellColor);
         }
     }
 }
@@ -51,8 +76,8 @@ void IterList::updateBoard(){
     //startAnim(15);
 }
 
-void IterList::drawCell(Vector2 pos, string text){
-    DrawRectangleRec({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, RAYWHITE);
+void IterList::drawCell(Vector2 pos, string text, Color color){
+    DrawRectangleRec({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, color);
     DrawRectangleLinesEx({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, 2, BLACK);  
 
     DrawText(text.c_str(), pos.x + 4, pos.y+UI_TABLE_CELL_HEIGHT/2, 12, BLACK);
@@ -65,12 +90,10 @@ void IterList::drawHeaders(Rectangle offsetBounds){
             if(y == 0 && x != 0){
                 string iter = "Iteracao ";
                 iter.append(to_string((int)(x/(UI_TABLE_CELL_WIDTH)))); // Que coisa feia
-                drawCell(cellPos, iter);
+                drawCell(cellPos, iter, RAYWHITE);
             }else if(x == 0 && y != 0){
-                // ToDo: Botar o nome certo das propriedades, pensei num vetor com o nome das propriedades
-                // Mas esse vetor não faz sentido ficar nessa classe, talvez no próprio quadro
                 string prop = board->get_nome_prop((int)(y/UI_TABLE_CELL_HEIGHT) - 1);
-                drawCell(cellPos, prop);
+                drawCell(cellPos, prop, RAYWHITE);
             }else{
                 continue; // Desnecessário, mas deixei aqui pra ficar claro que esse for não cuida de desenhar o resto das celulas
             }
