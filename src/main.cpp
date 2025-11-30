@@ -5,7 +5,6 @@
 #include "./interface/App.h"
 #include "./quadros/QuadroComparativo.h"
 
-
 int main(){
    int n; 
    cout << "Bem vindo! Digite o número de funções a serem inseridas: ";

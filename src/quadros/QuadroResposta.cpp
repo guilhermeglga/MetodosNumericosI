@@ -57,6 +57,10 @@ void QuadroResposta::iterar_total(int limite){
         tamanho += 1;
     }
 
+    for(size_t i = 0; i < quadro.size()-1; i++){
+        if(quadro[i].possivelRompimento == true) quadro[i].possivelRompimento = false;
+    }
+
     auto tf = std::chrono::high_resolution_clock::now();
     tempo += std::chrono::duration_cast<std::chrono::milliseconds>(tf - ti).count();
 }
