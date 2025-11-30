@@ -16,7 +16,7 @@ void ScrollPanel::append_child(ScrollableFrame *child_){
 }
 
 void ScrollPanel::remove_child(ScrollableFrame *child_){
-    int i = 0;
+    size_t i = 0;
     for(; i < children.size(); i++){
         if(child_ == children.at(i)) break;
     }

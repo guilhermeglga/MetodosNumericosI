@@ -16,6 +16,8 @@ using namespace std;
 #define UI_TABLE_CELL_HEIGHT 50
 #define UI_TABLE_CELL_WIDTH 100
 
+#define UI_PRECISION_NUMBERS 10
+
 // Não existe uma função de tabela na raygui :(
 
 // O tamanho disso aqui é dinâmico, ou seja, na inicialização só dá pra afirmar a origem
@@ -26,7 +28,7 @@ class IterList : public AnimatedFrame{
     public:
         void render(Vector2 scrollOffset) override;
 
-        IterList(Rectangle bounds_, QuadroComparativo* board_);
+        IterList(Rectangle bounds_, QuadroComparativo* board_, Font* font_, string title_);
 
         // Se o quadro se manter como um ponteiro, ver se a classe vai tratar de deletar ele
         ~IterList(){};
@@ -39,6 +41,10 @@ class IterList : public AnimatedFrame{
         // Se for necessário mudar a instancia de quadro, vou ter que mudar depois
         QuadroComparativo* board;
         QuadroResposta* resps[4];
+
+        Font* font;
+
+        string title;
 
         void drawCell(Vector2 pos, string text, Color color);
         void drawHeaders(Rectangle offsetBounds);

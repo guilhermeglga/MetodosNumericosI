@@ -36,14 +36,14 @@ int main(){
       try {
          QuadroComparativo quadro = QuadroComparativo({a3, a2, a1, a0}, epsilon, lambda, limite);
          quadros.push_back(&quadro);
-      } catch (std::runtime_error e) {
+      } catch (std::runtime_error &e) {
          cout << "\nErro na construção da função: " << e.what();
       }
       cout << "\n";
    }
 
-   //App app(1080, 720);
+   App app(1080, 720, &quadros);
 
-   //app.start();
+   app.start();
    return 0;
 }

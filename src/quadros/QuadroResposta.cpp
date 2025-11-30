@@ -19,9 +19,14 @@ QuadroResposta::QuadroResposta(
     std::vector <double> coeficientes, 
     double epsilon,
     double lambda
-) : polinomio(coeficientes)
+) 
 {
-    metodo = CriarMetodo(nome, polinomio, epsilon, lambda);
+    try{
+        polinomio = new Polinomio(coeficientes);
+    }catch(std::runtime_error &e){
+        throw e;
+    }
+    metodo = CriarMetodo(nome, *polinomio, epsilon, lambda);
 }
 
 long long QuadroResposta::getTempo() {

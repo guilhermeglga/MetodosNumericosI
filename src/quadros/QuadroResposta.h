@@ -39,7 +39,7 @@ class QuadroResposta{
     private:
         // Como newton é abstrato, esse atributo precisa ser um ponteiro
         Newton* metodo;
-        Polinomio polinomio;
+        Polinomio* polinomio;
         std::vector <iteracao> quadro;
 
         int tamanho = 0;

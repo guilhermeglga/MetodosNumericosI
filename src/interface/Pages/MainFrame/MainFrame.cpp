@@ -11,10 +11,15 @@
 
 #include "../../Widgets/Tables/IterList.h"
 
-MainFrame::MainFrame(Rectangle bounds_, ControlFlow* flow_, QuadroComparativo* quadro)
+MainFrame::MainFrame(Rectangle bounds_, ControlFlow* flow_, vector<QuadroComparativo*>* quadros_, Font* font_)
     : Page(bounds_, flow_)
 {
-    append_child(new IterList({0, 0, 0, 0}, quadro));
+    float total_height = 0;
+    for(size_t i = 0; i < quadros_->size(); i++){
+        IterList* list = new IterList({0, total_height, 0, 0}, quadros_->at(i), font_, "Tabela" + to_string(i));
+        total_height += list->get_bounds().height;
+        append_child(list);
+    }
 }
 
 void MainFrame::render(){

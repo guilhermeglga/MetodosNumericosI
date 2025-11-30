@@ -13,7 +13,7 @@ class MainFrame : public Page{
     public:
         void render();
 
-        MainFrame(Rectangle bounds_, ControlFlow* flow, QuadroComparativo* quadro);
+        MainFrame(Rectangle bounds_, ControlFlow* flow, vector<QuadroComparativo*>* quadros_, Font* font_);
 
     private:
 };

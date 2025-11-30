@@ -1,7 +1,5 @@
 #include "IterList.h"
 
-#define UI_PRECISION_NUMBERS 12
-
 void IterList::render(Vector2 scrollOffset){
     AnimatedFrame::render(scrollOffset);
 
@@ -45,23 +43,26 @@ void IterList::render(Vector2 scrollOffset){
             s = errfxStream.str();
             drawCell({offsetBounds.x + x, offsetBounds.y + y + 4*UI_TABLE_CELL_HEIGHT}, s, cellColor);
             
-            s = iter.parada?"SIM":"NÃO";
+            s = iter.parada?"SIM":"NAO";
             drawCell({offsetBounds.x + x, offsetBounds.y + y + 5*UI_TABLE_CELL_HEIGHT}, s, cellColor);
 
-            s = iter.possivelRompimento?"SIM":"NÃO";
+            s = iter.possivelRompimento?"SIM":"NAO";
             drawCell({offsetBounds.x + x, offsetBounds.y + y + 6*UI_TABLE_CELL_HEIGHT}, s, cellColor);
         }
     }
 }
 
-IterList::IterList(Rectangle bounds_, QuadroComparativo* board_)
+IterList::IterList(Rectangle bounds_, QuadroComparativo* board_, Font* font_, string title_)
     :AnimatedFrame(bounds_)
 {
     board = board_;
-    resps[0] = &board_->QPadrao_M;
-    resps[1] = &board_->QFL_M;
-    resps[2] = &board_->QPadrao_H;
-    resps[3] = &board_->QFL_H;
+    font = font_;
+    title = title_;
+
+    resps[0] = board_->QPadrao_M;
+    resps[1] = board_->QFL_M;
+    resps[2] = board_->QPadrao_H;
+    resps[3] = board_->QFL_H;
 
     bounds.height = 25*UI_TABLE_CELL_HEIGHT; // (5 propriedades)*4 tabelas + 1 celula vazia
     bounds.width = (board_->tam_max() + 1)*UI_TABLE_CELL_WIDTH; // tamanho do quadro + 1 celula vazia
@@ -80,14 +81,16 @@ void IterList::drawCell(Vector2 pos, string text, Color color){
     DrawRectangleRec({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, color);
     DrawRectangleLinesEx({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, 2, BLACK);  
 
-    DrawText(text.c_str(), pos.x + 4, pos.y+UI_TABLE_CELL_HEIGHT/2, 12, BLACK);
+    DrawTextEx(*font, text.c_str(), {pos.x + 4, pos.y+UI_TABLE_CELL_HEIGHT/2}, 16, 1, BLACK);
 }
 
 void IterList::drawHeaders(Rectangle offsetBounds){
     for(float x = 0; x < offsetBounds.width; x+=UI_TABLE_CELL_WIDTH){
         for(float y = 0; y < offsetBounds.height; y+=UI_TABLE_CELL_HEIGHT){
             Vector2 cellPos = {offsetBounds.x + x, offsetBounds.y + y};
-            if(y == 0 && x != 0){
+            if(x == 0 && y == 0){
+                drawCell(cellPos, title.c_str(), RAYWHITE);
+            }else if(y == 0 && x != 0){
                 string iter = "Iteracao ";
                 iter.append(to_string((int)(x/(UI_TABLE_CELL_WIDTH)))); // Que coisa feia
                 drawCell(cellPos, iter, RAYWHITE);
