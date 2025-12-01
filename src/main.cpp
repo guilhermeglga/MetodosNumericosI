@@ -41,7 +41,6 @@ int main(){
       cout << "\n";
    }
 
-   std::cout << "Tamanho quadro " << quadros.size() << std::endl;
    if(quadros.size() != 0){
         App app(1080, 720, &quadros);
 

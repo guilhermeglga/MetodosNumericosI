@@ -11,6 +11,7 @@
 #include "../metodos/Newton/NewtonFL/NewtonFLManual.h"
 #include "../metodos/Newton/NewtonFL/NewtonFLHorner.h"
 #include "../metodos/Newton/Polinomio.h"
+#include <cfloat>
 
 
 enum NomeMetodo {
@@ -44,6 +45,8 @@ class QuadroResposta{
 
         int tamanho = 0;
         long long tempo = 0;
+
+        Newton* CriarMetodo(NomeMetodo nome, Polinomio p, double epsilon, double lambda);
         
 };
 

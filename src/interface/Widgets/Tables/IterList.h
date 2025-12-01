@@ -14,9 +14,9 @@
 using namespace std;
 
 #define UI_TABLE_CELL_HEIGHT 50
-#define UI_TABLE_CELL_WIDTH 100
+#define UI_TABLE_CELL_WIDTH 150
 
-#define UI_PRECISION_NUMBERS 10
+#define UI_PRECISION_NUMBERS 15
 
 // Não existe uma função de tabela na raygui :(
 

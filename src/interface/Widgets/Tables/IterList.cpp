@@ -13,7 +13,7 @@ void IterList::render(Vector2 scrollOffset){
         for(int i = 0; i < tamanhoQuadro; i++){
             iteracao iter = resps[q]->getIteracao(i);
             float x = (i+1)*UI_TABLE_CELL_WIDTH;
-            float y = q*6*UI_TABLE_CELL_HEIGHT;
+            float y = q*5*UI_TABLE_CELL_HEIGHT;
 
             /*if(i == tamanhoQuadro-1 && animFrames > 0){
                 y = y - animFrames*2;
@@ -37,17 +37,12 @@ void IterList::render(Vector2 scrollOffset){
             errxStream << fixed << setprecision(UI_PRECISION_NUMBERS) << iter.erroEmX;
             s = errxStream.str();
             drawCell({offsetBounds.x + x, offsetBounds.y + y + 3*UI_TABLE_CELL_HEIGHT}, s, cellColor);
-
-            ostringstream errfxStream;
-            errfxStream << fixed << setprecision(UI_PRECISION_NUMBERS) << iter.erroEmFX;
-            s = errfxStream.str();
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 4*UI_TABLE_CELL_HEIGHT}, s, cellColor);
             
             s = iter.parada?"SIM":"NAO";
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 5*UI_TABLE_CELL_HEIGHT}, s, cellColor);
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 4*UI_TABLE_CELL_HEIGHT}, s, cellColor);
 
             s = iter.possivelRompimento?"SIM":"NAO";
-            drawCell({offsetBounds.x + x, offsetBounds.y + y + 6*UI_TABLE_CELL_HEIGHT}, s, cellColor);
+            drawCell({offsetBounds.x + x, offsetBounds.y + y + 5*UI_TABLE_CELL_HEIGHT}, s, cellColor);
         }
     }
 }
@@ -64,7 +59,7 @@ IterList::IterList(Rectangle bounds_, QuadroComparativo* board_, Font* font_, st
     resps[2] = &board_->QPadrao_H;
     resps[3] = &board_->QFL_H;
 
-    bounds.height = 25*UI_TABLE_CELL_HEIGHT; // (5 propriedades)*4 tabelas + 1 celula vazia
+    bounds.height = 21*UI_TABLE_CELL_HEIGHT; // (5 propriedades)*4 tabelas + 1 celula vazia
     bounds.width = (board_->tam_max() + 1)*UI_TABLE_CELL_WIDTH; // tamanho do quadro + 1 celula vazia
 }
 
@@ -79,7 +74,7 @@ void IterList::updateBoard(){
 
 void IterList::drawCell(Vector2 pos, string text, Color color){
     DrawRectangleRec({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, color);
-    DrawRectangleLinesEx({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, 2, BLACK);  
+    DrawRectangleLinesEx({pos.x, pos.y, UI_TABLE_CELL_WIDTH, UI_TABLE_CELL_HEIGHT}, 2, BLACK);
 
     DrawTextEx(*font, text.c_str(), {pos.x + 4, pos.y+UI_TABLE_CELL_HEIGHT/2}, 16, 1, BLACK);
 }

@@ -1,7 +1,10 @@
 #include "App.h"
 
 void App::start(){
+    SetTraceLogLevel(LOG_NONE);
+
     InitWindow(width, height, "MN");
+
     SetTargetFPS(60);
 
     //ToDo: padronizar caminhos de resources

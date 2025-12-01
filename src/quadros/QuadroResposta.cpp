@@ -1,8 +1,18 @@
 #include "../quadros/QuadroResposta.h"
 
 
-static Newton* CriarMetodo(NomeMetodo nome, Polinomio p, double epsilon, double lambda){
+Newton* QuadroResposta::CriarMetodo(NomeMetodo nome, Polinomio p, double epsilon, double lambda){
     double x0 = p.isolamento();
+    
+    iteracao iter0;
+    iter0.raiz = x0;
+    iter0.funcaoNaRaiz = p.valor_funcao(x0);
+    iter0.erroEmX = 0;
+    iter0.erroEmFX = 0;
+    iter0.parada = 0;
+    iter0.possivelRompimento = 0;
+    
+    quadro.push_back(iter0);
 
     switch (nome) {
         case NEWTON_PADRAO_DER_CALC : return new NewtonPadraoManual(p, x0, epsilon);
@@ -33,7 +43,7 @@ iteracao QuadroResposta::getIteracao(int indice){
 }
 
 int QuadroResposta::getTamanho(){
-    return tamanho;
+    return quadro.size();
 }
 
 void QuadroResposta::iterar_manual(){
