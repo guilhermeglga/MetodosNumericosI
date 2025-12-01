@@ -11,7 +11,7 @@ QuadroComparativo::QuadroComparativo(std::vector<double> coeficientes, double ep
         QFL_M.iterar_total(interacao_max);
         QFL_H.iterar_total(interacao_max);
 
-        nomes_prop = {"x", "f(x)", "Err x", "Convergiu", "Rompimento"};
+        nomes_prop = {"d", "f(d)", "Err d", "Convergiu", "Rompimento"};
     }
 
 int QuadroComparativo::tam_max()

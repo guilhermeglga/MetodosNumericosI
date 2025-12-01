@@ -10,7 +10,7 @@ int main(){
    cout << "Bem vindo! Digite o número de funções a serem inseridas: ";
    cin >> n;
    bool modo;
-   cout << "\nDigite agora o modo da função (0: função generica, 1: a3x^3 - 9a2x + 3): ";
+   cout << "\nDigite agora o modo da função (0: a3*d^3 + a2*d^2 + a1*d + a0, 1: a3*d^3 - 9a2*d + 3): ";
    cin >> modo;
    vector <QuadroComparativo*> quadros;
    
