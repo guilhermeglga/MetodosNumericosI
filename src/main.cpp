@@ -6,7 +6,7 @@
 #include "./quadros/QuadroComparativo.h"
 
 int main(){
-   int n; 
+   int n;
    cout << "Bem vindo! Digite o número de funções a serem inseridas: ";
    cin >> n;
    bool modo;
@@ -22,6 +22,7 @@ int main(){
          cout << "Digite os dois coeficientes (a3 a2): ";
          cin >> a3 >> a1;
          a2 = 0, a0 = 0, a1 *= -9;
+         a0+=3;
       }
       else {
          cout << "Digite os quatro coeficientes (a3 a2 a1 a0): ";
@@ -40,6 +41,8 @@ int main(){
       }
       cout << "\n";
    }
+
+   std::cout << "Iniciando a interface..." << std::endl;
 
    if(quadros.size() != 0){
         App app(1080, 720, &quadros);
