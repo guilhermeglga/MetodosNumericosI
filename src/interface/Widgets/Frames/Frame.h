@@ -6,6 +6,7 @@
 // diferente do que acontece com includes por path
 #include <raylib.h>
 #include <raygui.h>
+#include <raymath.h>
 
 // Widget base
 class Frame{

@@ -37,11 +37,14 @@ ScrollPanel::~ScrollPanel()
 void ScrollPanel::render(){
     GuiScrollPanel(panelRec, 0, panelContentRec, &scroll, &view);
 
-    BeginScissorMode(view.x, view.y, view.width, view.height);
+    /*BeginScissorMode(view.x, view.y, view.width, view.height);
         for (ScrollableFrame* child : children){
             child->render(Vector2{panelRec.x + scroll.x, panelRec.y + scroll.y});
         }
-    EndScissorMode();
+    EndScissorMode();*/
+    for (ScrollableFrame* child : children){
+        child->render(Vector2{0, 0});
+    }
 
     //DrawStyleEditControls();
 }
