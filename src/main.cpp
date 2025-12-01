@@ -28,7 +28,7 @@ int main(){
          cin >> a3 >> a2 >> a1 >> a0;
       }
 
-      cout << "\nDigite epsilon, o lambda e o número de interações maxima (eps lamb lim): ";
+      cout << "\nDigite epsilon, o lambda e o número de iterações maxima (eps lamb lim): ";
       double epsilon, lambda; int limite;
       cin >> epsilon >> lambda >> limite;
 
