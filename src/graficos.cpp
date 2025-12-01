@@ -33,13 +33,18 @@ int main() {
 
     Polinomio polinomio(graus);
 
-    std::cout << "Informe o começo (inclusivo) do intervalo em que "
+    //std::cout << "Informe o começo (inclusivo) do intervalo em que "
+    //<< "você deseja aplicar a função que você construiu: ";
+    //std::cin >> xi;
+
+    //std::cout << "Informe o final (inclusivo) do intervalo em que "
+    //<< "você deseja aplicar a função que você construiu: ";
+    //std::cin >> xf;
+
+    std::cout << "Informe o raio, partindo do zero, do intervalo em que "
     << "você deseja aplicar a função que você construiu: ";
     std::cin >> xi;
-
-    std::cout << "Informe o final (inclusivo) do intervalo em que "
-    << "você deseja aplicar a função que você construiu: ";
-    std::cin >> xf;
+    xf = -xi;
 
     if (xi > xf) std::swap(xi, xf);
 
@@ -129,16 +134,33 @@ int main() {
 
         }
 
-        float deslocX;
+        float deslocX, deslocY;
         if (posicaoEixoX == COMPRESSAO) {
             deslocX = -20.0f;
         } else deslocX = 20.0f;
+        if (posicaoEixoX == COMPRESSAO) {
+            deslocY = -20.0f;
+        } else deslocY = 20.0f;
 
         std::string valX = std::to_string(xi);
-        DrawText(valX.c_str(), vxi.x + distTracosX, vxi.y + deslocX, 5.0f, BLACK);
+        DrawTextPro(GetFontDefault(),
+            valX.c_str(),
+            (Vector2){vxi.x + distTracosX, vxi.y + deslocX},
+            (Vector2){0, 0},
+            90.0f,
+            10.0f,
+            1.0f,
+            BLACK);
 
         valX = std::to_string(xi + passoX * (numTracos - 1.0f));
-        DrawText(valX.c_str(), vxi.x + distTracosX * numTracos, vxi.y + deslocX, 5.0f, BLACK);
+        DrawTextPro(GetFontDefault(),
+            valX.c_str(),
+            (Vector2){vxi.x + distTracosX * numTracos, vxi.y + deslocX},
+            (Vector2){0, 0},
+            90.0f,
+            10.0f,
+            1.0f,
+            BLACK);
 
         /// Traços com os valores de Y
         for (float i = 1; i <= numTracos; i++) {
@@ -147,6 +169,12 @@ int main() {
             DrawLineEx(vyi + (Vector2){-10.f, distTracosX * i}, vyi + (Vector2){10.0f,distTracosX * i},
                 2.0, BLACK);
         }
+
+        std::string valY = std::to_string(polinomio.valor_funcao(xi));
+        DrawText(valY.c_str(), vyi.x + deslocY, vyi.y + distTracosY * numTracos, 5.0f, BLACK);
+
+        valY = std::to_string(polinomio.valor_funcao(xi + passoX * (numTracos - 1.0f)));
+        DrawText(valY.c_str(), vyi.x + deslocY, vyi.y + distTracosY, 5.0f, BLACK);
 
         // Desenho da função
         //for (float x = xi, xb)
