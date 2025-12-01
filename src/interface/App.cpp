@@ -1,8 +1,14 @@
 #include "App.h"
 
 void App::start(){
+    SetTraceLogLevel(LOG_NONE);
+
     InitWindow(width, height, "MN");
+
     SetTargetFPS(60);
+
+    //ToDo: padronizar caminhos de resources
+    font = LoadFont("../deps/Roboto-Regular.ttf");
 
     while(!WindowShouldClose()){
         BeginDrawing();
@@ -14,11 +20,15 @@ void App::start(){
         EndDrawing();
     }
 
+    UnloadFont(font);
+
     CloseWindow();
 }
 
-App::App(int width_, int height_)
-    : main_frame({0, 0, (float)width_, (float)height_}, &flow)
+
+#include <iostream>
+App::App(int width_, int height_, vector<QuadroComparativo*>* quadro)
+    : main_frame({0, 0, (float)width_, (float)height_}, &flow, quadro, &font)
 {
     width = width_;
     height = height_;

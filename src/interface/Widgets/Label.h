@@ -14,9 +14,12 @@ class Label : public ScrollableFrame{
     public:
         void render(Vector2 scrollOffset) override;
 
-        Label(Rectangle bounds_);
+        Label(Rectangle bounds_, string text_);
 
-        string text;
+        void set_text(string text_);
+
+        private:
+            string text;
 };
 
 #endif // UI_LABEL_H

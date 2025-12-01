@@ -6,13 +6,21 @@ ScrollPanel::ScrollPanel(Rectangle bounds_)
     scroll = { 0, 0 };
     view = { 0, 0, 0, 0 };
 
-    panelRec = { 0, 0, 1080, 720 };
+    panelRec = { 0, 0, bounds_.width, bounds.height };
     panelContentRec = { 0, 0, 0, 0 };
 }
 
 void ScrollPanel::append_child(ScrollableFrame *child_){
     children.push_back(child_);
     panelContentRec = get_max_children_bounds(); // Não é super eficiente mas não deve ser um problema
+}
+
+void ScrollPanel::remove_child(ScrollableFrame *child_){
+    size_t i = 0;
+    for(; i < children.size(); i++){
+        if(child_ == children.at(i)) break;
+    }
+    if(i < children.size()) children.erase(children.begin() + i);
 }
 
 void ScrollPanel::update_content_rec(){

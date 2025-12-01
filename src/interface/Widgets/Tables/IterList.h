@@ -1,31 +1,22 @@
 #ifndef UI_ITERLIST_H
 #define UI_ITERLIST_H
 
+#include "../../../quadros/QuadroComparativo.h"
 #include "../../../iteracao/iteracao.h"
 #include "../Frames/AnimatedFrame.h"
 
 #include <string>
 #include <vector>
 
+#include <sstream>
+#include <iomanip>
+
 using namespace std;
 
-// Copiei temporariamente as definições do quadro pra cá, só pra já definir o widget
-class QuadroResposta{
-    public:
-        QuadroResposta() {tempo = 0;}
-
-        void adicionar(iteracao inter) { quadro.push_back(inter); };
-
-        iteracao retornarInteracao(int indice){ return quadro.at(indice); };
-
-        int tamanhoQuadro() { return quadro.size(); };
-    private:
-        vector <iteracao> quadro;
-        double tempo;
-};
-
 #define UI_TABLE_CELL_HEIGHT 50
-#define UI_TABLE_CELL_WIDTH 100
+#define UI_TABLE_CELL_WIDTH 150
+
+#define UI_PRECISION_NUMBERS 15
 
 // Não existe uma função de tabela na raygui :(
 
@@ -37,7 +28,7 @@ class IterList : public AnimatedFrame{
     public:
         void render(Vector2 scrollOffset) override;
 
-        IterList(Rectangle bounds_, QuadroResposta* board_);
+        IterList(Rectangle bounds_, QuadroComparativo* board_, Font* font_, string title_);
 
         // Se o quadro se manter como um ponteiro, ver se a classe vai tratar de deletar ele
         ~IterList(){};
@@ -48,9 +39,14 @@ class IterList : public AnimatedFrame{
     private:
         // Assumindo por enquanto que essa classe já vai ser criada com um quadro definido
         // Se for necessário mudar a instancia de quadro, vou ter que mudar depois
-        QuadroResposta* board;
+        QuadroComparativo* board;
+        QuadroResposta* resps[4];
 
-        void drawCell(Vector2 pos, string text);
+        Font* font;
+
+        string title;
+
+        void drawCell(Vector2 pos, string text, Color color);
         void drawHeaders(Rectangle offsetBounds);
 };
 

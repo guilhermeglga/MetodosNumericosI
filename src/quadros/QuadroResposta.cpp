@@ -1,8 +1,18 @@
 #include "../quadros/QuadroResposta.h"
 
 
-static Newton* CriarMetodo(NomeMetodo nome, Polinomio p, double epsilon, double lambda){
+Newton* QuadroResposta::CriarMetodo(NomeMetodo nome, Polinomio p, double epsilon, double lambda){
     double x0 = p.isolamento();
+    
+    iteracao iter0;
+    iter0.raiz = x0;
+    iter0.funcaoNaRaiz = p.valor_funcao(x0);
+    iter0.erroEmX = 0;
+    iter0.erroEmFX = 0;
+    iter0.parada = 0;
+    iter0.possivelRompimento = 0;
+    
+    quadro.push_back(iter0);
 
     switch (nome) {
         case NEWTON_PADRAO_DER_CALC : return new NewtonPadraoManual(p, x0, epsilon);
@@ -19,7 +29,7 @@ QuadroResposta::QuadroResposta(
     std::vector <double> coeficientes, 
     double epsilon,
     double lambda
-) : polinomio(coeficientes) 
+) : polinomio(coeficientes)
 {
     metodo = CriarMetodo(nome, polinomio, epsilon, lambda);
 }
@@ -33,7 +43,7 @@ iteracao QuadroResposta::getIteracao(int indice){
 }
 
 int QuadroResposta::getTamanho(){
-    return tamanho;
+    return quadro.size();
 }
 
 void QuadroResposta::iterar_manual(){
@@ -47,13 +57,18 @@ void QuadroResposta::iterar_manual(){
 }
 
 void QuadroResposta::iterar_total(int limite){
-    bool continuar = true;
+    bool parar = false;
 
     auto ti = std::chrono::high_resolution_clock::now();
-    while(continuar && tamanho < limite){
-        quadro.push_back(metodo->iterar());
-        continuar ^= quadro[tamanho].parada;
+    while(!parar && tamanho < limite){
+        iteracao iter = metodo->iterar();
+        quadro.push_back(iter);
+        parar = iter.parada;
         tamanho += 1;
+    }
+
+    for(size_t i = 0; i < quadro.size()-1; i++){
+        if(quadro[i].possivelRompimento == true) quadro[i].possivelRompimento = false;
     }
 
     auto tf = std::chrono::high_resolution_clock::now();

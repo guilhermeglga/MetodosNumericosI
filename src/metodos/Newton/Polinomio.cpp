@@ -27,6 +27,8 @@ double Polinomio::derivada_manual(double x) {
 double Polinomio::derivada_horner(double x) {
     if(n == 1) return 0;
 
+    valor_funcao(x);
+    
     c[n-1] = b[n-1];
     for (int i = n-2; i >= 1; i--) {
         c[i] = b[i] + c[i+1] * x;
@@ -34,15 +36,32 @@ double Polinomio::derivada_horner(double x) {
     return c[1];
 }
 
+bool Polinomio::raiz_real(){ //verifica se possui raizes reais
+    double eps = 1e-12;
+    if(fabs(a[3]) > eps) return true; //funcoes de grau impar sempre tem raiz
+    else if(fabs(a[2]) <= eps && fabs(a[1]) > eps) return true;
+    else if(fabs(a[3]) <= eps && fabs(a[2]) <= eps && fabs(a[1]) <= eps && fabs(a[0]) > eps) return false;
+
+    //se nao entrou em nenhum if, é uma função do segundo grau
+    //basta calcular o discriminante (delta)
+    double d = a[1]*a[1] - 4*a[2]*a[0];
+    if(d < 0) return false;
+    else return true;
+}
+
 double Polinomio::isolamento() {
+    double eps = 1e-12;
+    if(fabs(a[3]) <= eps && fabs(a[2]) <= eps && fabs(a[1]) <= eps && fabs(a[0]) <= eps) return 0;
+    if(raiz_real() == false) throw std::runtime_error("Sem raizes reais");
+
     double xa = 0, xb = 0;
     while(true){
-        double a = valor_funcao(xa);
-        double b = valor_funcao(xb);
+        double fa = valor_funcao(xa);
+        double fb = valor_funcao(xb);
 
-        if(a * b < 0) {
+        if(fa * fb < 0) {
             //a mudou ou b mudou
-            if(a * valor_funcao(xa + 0.5) < 0) return (xa + 0.25);
+            if(fa * valor_funcao(xa + 0.5) < 0) return (xa + 0.25);
             return (xb - 0.25);
         }
 

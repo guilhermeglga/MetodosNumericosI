@@ -8,12 +8,13 @@ class App{
     public:
         void start();
 
-        App(int width_, int height_);
+        App(int width_, int height_, vector<QuadroComparativo*>* quadro);
 
     private:
         int width, height;
         MainFrame main_frame;
 
+        Font font;
         ControlFlow flow;
 };
 

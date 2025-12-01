@@ -1,9 +1,8 @@
 #ifndef UI_MAINFRAME_H
 #define UI_MAINFRAME_H
 
-#include "../InputFrame/InputFrame.h"
-#include "../OutputFrame/OutputFrame.h"
 #include "../Page/Page.h"
+#include "../../Widgets/Tables/IterList.h"
 
 /*
     Onde o quadro comparativo vai ficar? 
@@ -14,11 +13,9 @@ class MainFrame : public Page{
     public:
         void render();
 
-        MainFrame(Rectangle bounds_, ControlFlow* flow);
+        MainFrame(Rectangle bounds_, ControlFlow* flow, vector<QuadroComparativo*>* quadros_, Font* font_);
 
     private:
-        InputFrame in_frame;
-        OutputFrame out_frame;
 };
 
 #endif // UI_MAINFRAME_H

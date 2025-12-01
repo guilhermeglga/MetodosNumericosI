@@ -23,6 +23,10 @@ void Page::append_child(ScrollableFrame *child_){
     scrollPanel.append_child(child_);
 }
 
+void Page::remove_child(ScrollableFrame *child_){
+    scrollPanel.remove_child(child_);
+}
+
 void Page::update_content_rec(){
     scrollPanel.update_content_rec();
 }
