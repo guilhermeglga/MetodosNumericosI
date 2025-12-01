@@ -21,8 +21,7 @@ int main(){
       if (modo){
          cout << "Digite os dois coeficientes (a3 a2): ";
          cin >> a3 >> a1;
-         a2 = 0, a0 = 0, a1 *= -9;
-         a0+=3;
+         a2 = 0, a0 = 3, a1 *= -9;
       }
       else {
          cout << "Digite os quatro coeficientes (a3 a2 a1 a0): ";

@@ -6,7 +6,7 @@ ScrollPanel::ScrollPanel(Rectangle bounds_)
     scroll = { 0, 0 };
     view = { 0, 0, 0, 0 };
 
-    panelRec = { 0, 0, 1080, 720 };
+    panelRec = { 0, 0, bounds_.width, bounds.height };
     panelContentRec = { 0, 0, 0, 0 };
 }
 
